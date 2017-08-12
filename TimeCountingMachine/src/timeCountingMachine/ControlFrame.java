@@ -50,9 +50,9 @@ public class ControlFrame extends JFrame {
 
 	// private JToggleButton subStopButton = new JToggleButton("STOP");
 
-	private JButton upButton = new JButton("Â¡Ã£");
+	private JButton upButton = new JButton("¡ã");
 
-	private JButton downButton = new JButton("Â¡Ã¥");
+	private JButton downButton = new JButton("¡å");
 
 	private JLabel mainButtonLabel = new JLabel("total driving time");
 
