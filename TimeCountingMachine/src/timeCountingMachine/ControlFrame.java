@@ -36,6 +36,7 @@ public class ControlFrame extends JFrame {
 	private JPanel subButtonPanel = new JPanel(new GridLayout(3, 1, 0, 5));
 	private JPanel switchPersonPanel = new JPanel(new GridLayout(2, 1, 0, 5));
 	private JPanel mainPanel = new JPanel(new GridLayout(1, 3, 5, 5));
+
 	private JPanel userDataPanel = new JPanel();
 	
 	public static JToggleButton mainStartStopButton = new JToggleButton("START");
