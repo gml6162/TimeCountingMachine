@@ -33,13 +33,9 @@ import timeCountingMachine.MyTimer.sequenceTimer;
 public class ControlFrame extends JFrame {
 
 	private JPanel mainButtonPanel = new JPanel(new GridLayout(3, 1, 0, 5));
-
 	private JPanel subButtonPanel = new JPanel(new GridLayout(3, 1, 0, 5));
-
 	private JPanel switchPersonPanel = new JPanel(new GridLayout(2, 1, 0, 5));
-
 	private JPanel mainPanel = new JPanel(new GridLayout(1, 3, 5, 5));
-
 	private JPanel userDataPanel = new JPanel();
 	
 	public static JToggleButton mainStartStopButton = new JToggleButton("START");
@@ -50,9 +46,9 @@ public class ControlFrame extends JFrame {
 
 	// private JToggleButton subStopButton = new JToggleButton("STOP");
 
-	private JButton upButton = new JButton("¡ã");
+	private JButton upButton = new JButton("ï¿½ï¿½");
 
-	private JButton downButton = new JButton("¡å");
+	private JButton downButton = new JButton("ï¿½ï¿½");
 
 	private JLabel mainButtonLabel = new JLabel("total driving time");
 

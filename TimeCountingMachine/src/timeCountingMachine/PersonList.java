@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class PersonList{
 	int b;
-	String filepath = "аж╢о╬Н╦М╢э.txt";
+	String filepath = "О©╫ж╢о╬О©╫О©╫О©╫.txt";
 	FileInputStream file;
 	public PersonList(StringBuffer buffer){
 		try {
@@ -16,7 +16,6 @@ public class PersonList{
 				buffer.append((char) b);
 				b = file.read();
 			}
-
 		} catch (FileNotFoundException e) {
 			System.out.println("Oops : FileNotFoundException");
 		} catch (IOException e) {

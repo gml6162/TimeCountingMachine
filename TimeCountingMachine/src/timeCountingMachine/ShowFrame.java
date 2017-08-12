@@ -14,10 +14,6 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 public class ShowFrame extends JFrame {
-
-	//private static final Insets insets = new Insets(0, 0, 0, 0);
-
-	// private JPanel mainPanel = new JPanel(new GridLayout(3, 1, 5, 5));
 	private JPanel totalDrivingTimerPanel = new JPanel(new GridLayout(1,1));
 	private JPanel lapTimerPanel = new JPanel();
 	private JPanel personPanel = new JPanel();
@@ -67,7 +63,7 @@ public class ShowFrame extends JFrame {
 		gbc.fill = GridBagConstraints.BOTH;
 		this.setLayout(gbl);
 		
-		//boxlayout »ç¿ë
+		//boxlayout ï¿½ï¿½ï¿½
 		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 2, 1);
 		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 2, 1);
 		addGrid(gbl, gbc, rankTable, 2, 0, 1, 3, 1, 1);

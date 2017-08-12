@@ -21,13 +21,9 @@ public class FileManager {
 
 		try {
 			reader = new FileWriter("savedData.txt");
-
 			reader.write("저장");
-
 			reader.append('!');
-
 			reader.close();
-
 		}
 
 		catch (Exception exception) {

@@ -153,5 +153,3 @@ public class MyTimer {
 	 * b.setText("START"); lapEndTime = System.currentTimeMillis(); lapTime =
 	 * lapEndTime - lapStartTime; subTimer.cancel(); } } });
 	 */
-
-
