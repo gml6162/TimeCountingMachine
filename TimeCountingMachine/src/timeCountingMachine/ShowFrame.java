@@ -21,9 +21,9 @@ public class ShowFrame extends JFrame {
 	private JPanel totalDrivingTimerPanel = new JPanel(new GridLayout(1,1));
 	private JPanel lapTimerPanel = new JPanel();
 	private JPanel personPanel = new JPanel();
-	private JButton newButton = new JButton("test");
-	private JPanel bestDataPanel = new JPanel(new GridLayout(1,2));
-	private JPanel userDataPanel = new JPanel();
+	private JLabel currentNameLabel = new JLabel();
+	private JPanel recordPanel = new JPanel();
+	private JTable rankTable = new JTable();
 
 	private static JLabel totalDrivingTimerLabel = new JLabel("05:00:00");
 	private static JLabel lapTimerLabel = new JLabel("00:00:00");
@@ -52,18 +52,7 @@ public class ShowFrame extends JFrame {
 		this.add(c);
 	}
 	
-	private void setUserDataPanel() {
-		String[] columnNames = {"Name", "Time"};
-		String[][] data = new String[Main.userData.size()][2];
-		
-		data[0][0]="1";
-		data[0][1]="success";
-		
-		JTable userDataTable = new JTable(data, columnNames);
-		
-		
-		userDataPanel.add(userDataTable);
-	}
+
 
 	public ShowFrame() {
 		super("Show");
@@ -76,14 +65,13 @@ public class ShowFrame extends JFrame {
 		this.setVisible(false);
 		// layout
 		gbc.fill = GridBagConstraints.BOTH;
-		this.setUserDataPanel();
 		this.setLayout(gbl);
 		
 		//boxlayout »ç¿ë
 		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 2, 1);
 		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 2, 1);
-		addGrid(gbl, gbc, bestDataPanel, 2, 0, 2, 1, 1, 1);
-		addGrid(gbl, gbc, userDataPanel, 2, 1, 2, 10, 1, 1);
+		addGrid(gbl, gbc, rankTable, 2, 0, 1, 3, 1, 1);
+		addGrid(gbl, gbc, currentNameLabel, 0, 2, 1, 1, 1, 1);
 		// mainPanel.add(totalDrivingTimerPanel);
 		// mainPanel.add(lapTimerPanel);
 		// mainPanel.add(personPanel);
