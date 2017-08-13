@@ -12,6 +12,5 @@ public class Main {
 		ControlFrame ctrlFrame = new ControlFrame();
 		FileManager.saveData(); // for output test
 		FileManager.loadUserNames(); // for input test
-		
 	}
 }

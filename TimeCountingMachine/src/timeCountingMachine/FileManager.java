@@ -21,7 +21,7 @@ public class FileManager {
 
 		try {
 			reader = new FileWriter("savedData.txt");
-			reader.write("���옣");
+			reader.write("hello");
 			reader.append('!');
 			reader.close();
 		}

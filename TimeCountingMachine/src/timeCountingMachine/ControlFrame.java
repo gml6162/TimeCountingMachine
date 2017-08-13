@@ -47,9 +47,9 @@ public class ControlFrame extends JFrame {
 
 	// private JToggleButton subStopButton = new JToggleButton("STOP");
 
-	private JButton upButton = new JButton("��");
+	private JButton upButton = new JButton("up");
 
-	private JButton downButton = new JButton("��");
+	private JButton downButton = new JButton("down");
 
 	private JLabel mainButtonLabel = new JLabel("total driving time");
 
