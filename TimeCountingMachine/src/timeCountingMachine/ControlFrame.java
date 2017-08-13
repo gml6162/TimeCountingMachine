@@ -9,7 +9,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
 import java.awt.event.ActionListener;
-
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Timer;
 
 import java.util.TimerTask;
@@ -61,13 +62,24 @@ public class ControlFrame extends JFrame {
 	private void setUserDataPanel() {
 		String[] columnNames = { "Name", "Time" };
 		String[][] data = new String[Main.userData.size()][2];
+		int i = 0;
 		
-		for(int i = 0; i< Main.userData.size(); i++){
+		Set<String> key = Main.userData.keySet();
+		
+		for(Iterator<String> iterator = key.iterator();iterator.hasNext();){
+			//key name
+			String keyName = (String) iterator.next();
+			
+
+			data[i][0] = keyName;
+			i++;
 			
 		}
+		
+		
 
 		JTable userDataTable = new JTable(data, columnNames);
-
+		
 		userDataPanel.add(userDataTable);
 	}
 
@@ -88,6 +100,7 @@ public class ControlFrame extends JFrame {
 		mainButtonPanel.add(mainStartStopButton);
 		// mainButtonPanel.add(mainStopButton);
 		subButtonPanel.add(subStartStopButton);
+		
 		
 
 		// subButtonPanel.add(subStopButton);
