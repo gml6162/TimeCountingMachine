@@ -54,6 +54,10 @@ public class ShowFrame extends JFrame {
 		this.setBounds(100, 200, 300, 300);
 		this.initalize();
 	}
+	
+	public void setcurrentNameLabel(String key){
+		
+	}
 
 	private void initalize() {
 		this.setVisible(false);
@@ -61,6 +65,9 @@ public class ShowFrame extends JFrame {
 		gbc.fill = GridBagConstraints.BOTH;
 		this.setLayout(gbl);
 
+		
+		
+		
 		// gridboxlayout
 		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 3, 1);
 		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 3, 1);
