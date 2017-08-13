@@ -21,7 +21,7 @@ public class FileManager {
 
 		try {
 			reader = new FileWriter("savedData.txt");
-			reader.write("저장");
+			reader.write("���옣");
 			reader.append('!');
 			reader.close();
 		}
@@ -38,7 +38,7 @@ public class FileManager {
 		StringTokenizer stringTokenizer;
 		int id = 0;
 		String name = new String();
-		String[] content = new String[3];
+		String[] content = {"","",""};
 
 		try {
 			reader = new FileReader("userNames.txt");
