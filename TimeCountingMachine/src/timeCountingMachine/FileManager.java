@@ -14,7 +14,6 @@ public class FileManager
 	public static void saveData()
 	{
 		FileWriter reader;
-
 		try
 		{
 			reader = new FileWriter("savedData.txt");
@@ -22,22 +21,17 @@ public class FileManager
 			reader.append('!');
 			reader.close();
 		}
-
 		catch (Exception exception)
 		{
 			exception.printStackTrace();
 		}
 	}
 
-	public static void loadUserNames()
+	public static HashMap<String, Object> loadUserData()
 	{
 		StringBuffer buffer = new StringBuffer();
-
 		FileReader reader;
-		StringTokenizer stringTokenizer;
-		int id = 0;
-		String name = new String();
-		String[] content = {"","",""};
+		HashMap<String, Object> userData = new HashMap<String, Object>();
 
 		try
 		{
@@ -55,33 +49,14 @@ public class FileManager
 		{
 			System.out.print("Maybe not found: userNames.txt");
 			exception.printStackTrace();
+			return userData;
 		}
 
-		stringTokenizer = new StringTokenizer(buffer.toString(), "\n", false);
+		StringTokenizer stringTokenizer = new StringTokenizer(buffer.toString(), "\n", false);
 		while (stringTokenizer.hasMoreTokens())
 		{
-			String tmp = stringTokenizer.nextToken();
-			if (name.length() == 0)
-			{
-				name = tmp;
-			}
-			else if (content[0].length() == 0)
-			{
-				content[0] = tmp;
-			}
-			else if (content[1].length() == 0)
-			{
-				content[1] = tmp;
-			}
-			else if (content[2].length() == 0)
-			{
-				content[2] = tmp;
-				Main.userData.put(name, content);
-				name = new String();
-				content = new String[3];
-			}
-
+			userData.put(stringTokenizer.nextToken(), {stringTokenizer.nextToken(), stringTokenizer.nextToken(), stringTokenizer.nextToken()});
 		}
+		return userData;
 	}
-
 }
