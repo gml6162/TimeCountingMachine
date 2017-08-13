@@ -37,7 +37,7 @@ public class FileManager
 		StringTokenizer stringTokenizer;
 		int id = 0;
 		String name = new String();
-		String[] content = new String[3];
+		String[] content = {"","",""};
 
 		try
 		{

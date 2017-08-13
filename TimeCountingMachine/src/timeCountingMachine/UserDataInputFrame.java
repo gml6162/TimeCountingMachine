@@ -10,8 +10,8 @@ import javax.swing.JTextField;
 
 public class UserDataInputFrame extends JFrame{
 	private JPanel userDataInputPanel = new JPanel(); 
-	private JButton addPersonButton = new JButton("�Է�");
-	private JButton chkButton = new JButton("�Ϸ�");
+	private JButton addPersonButton = new JButton("add");
+	private JButton chkButton = new JButton("check");
 
 	private JTextField nameField = new JTextField(10);
 	

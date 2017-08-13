@@ -48,11 +48,16 @@ public class MyTimer {
 
 			drivingEndTime = (long) System.currentTimeMillis();
 			drivingTime = 300000 - (drivingEndTime - drivingStartTime);
+			//drivingTime = 300 - (drivingEndTime - drivingStartTime);
 			if (drivingTime < 0) {
 				ControlFrame.mainStartStopButton.doClick();
-				ControlFrame.subStartStopButton.doClick();
-				mainTime = "05:00:00";
-				
+				drivingTime = 0;
+				if(ControlFrame.subStartStopButton.getText().equals("STOP")){
+					ControlFrame.subStartStopButton.doClick();
+				}
+				ShowFrame.setTotalDrivingTimerLabel("00:00:00");
+				ShowFrame.setLapTimerLabel("00:00:00");
+
 			} else {
 				mainTimeMinute = (int) (drivingTime / 60000);
 				mainTimeSecond = (int) ((drivingTime / 1000) % 60);
@@ -75,7 +80,6 @@ public class MyTimer {
 			subTimeMinute = (int) (lapTime / 60000);
 			subTimeSecond = (int) ((lapTime / 1000) % 60);
 			subTimeMillisec = (int) ((lapTime / 10) % 100);
-
 			subTime = String.format("%02d:%02d:%02d", subTimeMinute, subTimeSecond, subTimeMillisec);
 		}
 	};
