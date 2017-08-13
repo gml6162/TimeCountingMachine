@@ -62,8 +62,9 @@ public class ControlFrame extends JFrame {
 		String[] columnNames = { "Name", "Time" };
 		String[][] data = new String[Main.userData.size()][2];
 		
-		data[0][0] = "1";
-		data[0][1] = "success";
+		for(int i = 0; i< Main.userData.size(); i++){
+			
+		}
 
 		JTable userDataTable = new JTable(data, columnNames);
 
