@@ -56,5 +56,10 @@ public class FileManager
 		StringTokenizer stringTokenizer = new StringTokenizer(buffer.toString(), "\n", false);
 		while (stringTokenizer.hasMoreTokens())
 			userData.put(stringTokenizer.nextToken(), new String[]{stringTokenizer.nextToken(), stringTokenizer.nextToken(), stringTokenizer.nextToken()});
+		//String[] test = userData.get("김건호");
+		//System.out.println(userData.keySet().iterator().next().getClass());
+		System.out.println(userData.get(userData.keySet().iterator().next().toString())[0]);
+		System.out.println((userData.get("abc") == null));
+		
 	}
 }
