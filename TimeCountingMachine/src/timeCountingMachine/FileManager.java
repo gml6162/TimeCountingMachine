@@ -12,14 +12,16 @@ import java.util.StringTokenizer;
 
 public class FileManager
 {
+	public static HashMap<String, String[]> userData;
+	
 	public static void saveData()
 	{
 		FileWriter reader;
 		try
 		{
 			reader = new FileWriter("savedData.txt");
-			reader.write("hello");
-			reader.append('!');
+			reader.write("test");
+			//reader.append('!');
 			reader.close();
 		}
 		catch (Exception exception)
@@ -28,36 +30,31 @@ public class FileManager
 		}
 	}
 
-	public static HashMap<String, String[]> loadUserData()
+	public static void loadUserData(String textFile)
 	{
-		StringBuffer buffer = new StringBuffer();
 		FileReader reader;
-		HashMap<String, String[]> userData = new HashMap<String, String[]>();
+		StringBuffer buffer = new StringBuffer();
+		userData = new HashMap<String, String[]>();
 
 		try
 		{
-			reader = new FileReader("userNames.txt");
+			reader = new FileReader(textFile);
 			int read;
 			while ((read = reader.read()) != -1)
 			{
 				buffer.append((char) read);
 				System.out.print((char) read);
 			}
-
 			reader.close();
 		}
 		catch (Exception exception)
 		{
-			System.out.print("Maybe not found: userNames.txt");
+			System.out.print("Maybe not found: " + textFile);
 			exception.printStackTrace();
-			return userData;
 		}
 
 		StringTokenizer stringTokenizer = new StringTokenizer(buffer.toString(), "\n", false);
 		while (stringTokenizer.hasMoreTokens())
-		{
 			userData.put(stringTokenizer.nextToken(), new String[]{stringTokenizer.nextToken(), stringTokenizer.nextToken(), stringTokenizer.nextToken()});
-		}
-		return userData;
 	}
 }
