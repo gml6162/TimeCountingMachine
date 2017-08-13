@@ -30,12 +30,7 @@ public class ControlFrame extends JFrame {
 	private JPanel userDataPanel = new JPanel();
 
 	public static JToggleButton mainStartStopButton = new JToggleButton("START");
-
-	// private JToggleButton mainStopButton = new JToggleButton("STOP");
-
 	public static JToggleButton subStartStopButton = new JToggleButton("START");
-
-	// private JToggleButton subStopButton = new JToggleButton("STOP");
 
 	private JButton upButton = new JButton("up");
 	private JButton downButton = new JButton("down");

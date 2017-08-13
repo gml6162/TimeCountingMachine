@@ -15,31 +15,27 @@ import javax.swing.SwingConstants;
 
 public class MyTimer {
 
+	/* Timer */
 	private Timer mainTimer = new Timer();
 	private Timer subTimer = new Timer();
 
+	/* Visual time */
 	private String mainTime;
 	private int mainTimeMinute;
 	private int mainTimeSecond;
 	private int mainTimeMillisec;
-
 	private String subTime;
 	private int subTimeMinute;
 	private int subTimeSecond;
 	private int subTimeMillisec;
 
-	/* GF */
+	/* Actual time */
 	private long drivingStartTime;
 	private long drivingEndTime;
 	private long drivingTime;
-
 	private long lapStartTime;
 	private long lapEndTime;
 	private long lapTime;
-
-	//private JToggleButton mainStartStopButton = new JToggleButton("START");
-	// private JToggleButton mainStopButton = new JToggleButton("STOP");
-	//private JToggleButton subStartStopButton = new JToggleButton("START");
 
 	class MainTimerTask extends TimerTask {
 		@Override
