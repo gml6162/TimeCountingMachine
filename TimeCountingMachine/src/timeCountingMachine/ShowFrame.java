@@ -63,7 +63,7 @@ public class ShowFrame extends JFrame {
 		gbc.fill = GridBagConstraints.BOTH;
 		this.setLayout(gbl);
 		
-		//boxlayout ���
+		//gridboxlayout
 		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 2, 1);
 		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 2, 1);
 		addGrid(gbl, gbc, rankTable, 2, 0, 1, 3, 1, 1);
@@ -79,7 +79,7 @@ public class ShowFrame extends JFrame {
 		totalDrivingTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lapTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
  
-		// this.add(mainPanel);k
+		// this.add(mainPanel);
 		this.setVisible(true);
 	}
 

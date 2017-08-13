@@ -116,8 +116,6 @@ public class ControlFrame extends JFrame {
 
 		// //
 
-		// °¡¿îµ¥Á¤·Ä
-
 		subButtonLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		// event

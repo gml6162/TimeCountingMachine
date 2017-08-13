@@ -47,12 +47,17 @@ public class MyTimer {
 			ShowFrame.setTotalDrivingTimerLabel(mainTime);
 
 			drivingEndTime = (long) System.currentTimeMillis();
-			drivingTime = 300000 - (drivingEndTime - drivingStartTime);
+			//drivingTime = 300000 - (drivingEndTime - drivingStartTime);
+			drivingTime = 300 - (drivingEndTime - drivingStartTime);
 			if (drivingTime < 0) {
 				ControlFrame.mainStartStopButton.doClick();
-				ControlFrame.subStartStopButton.doClick();
-				mainTime = "05:00:00";
-				
+				drivingTime = 0;
+				if(ControlFrame.subStartStopButton.getText().equals("STOP")){
+					ControlFrame.subStartStopButton.doClick();
+				}
+				ShowFrame.setTotalDrivingTimerLabel("00:00:00");
+				ShowFrame.setLapTimerLabel("00:00:00");
+
 			} else {
 				mainTimeMinute = (int) (drivingTime / 60000);
 				mainTimeSecond = (int) ((drivingTime / 1000) % 60);
