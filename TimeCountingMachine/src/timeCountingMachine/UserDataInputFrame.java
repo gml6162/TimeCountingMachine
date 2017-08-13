@@ -36,7 +36,7 @@ public class UserDataInputFrame extends JFrame{
 					{
 						return;
 					}
-					FileManager.userData.put(nameField.getText(), 0l);
+					//FileManager.userData.put(nameField.getText(), 0l);
 					nameField.setText("");
 				}
 			}

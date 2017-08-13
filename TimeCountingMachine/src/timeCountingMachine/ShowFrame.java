@@ -86,7 +86,7 @@ public class ShowFrame extends JFrame {
 		// mainPanel.add(totalDrivingTimerPanel);
 		// mainPanel.add(lapTimerPanel);
 		// mainPanel.add(personPanel);
-		setcurrentNamePanel("±è°ÇÈ£");
+		setcurrentNamePanel("abc");
 
 		totalDrivingTimerPanel.add(totalDrivingTimerLabel);
 		lapTimerPanel.add(lapTimerLabel);

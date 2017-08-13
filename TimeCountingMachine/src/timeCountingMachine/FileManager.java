@@ -53,13 +53,11 @@ public class FileManager
 			exception.printStackTrace();
 		}
 
-		StringTokenizer stringTokenizer = new StringTokenizer(buffer.toString(), "\n", false);
+		StringTokenizer stringTokenizer = new StringTokenizer(buffer.toString());
 		while (stringTokenizer.hasMoreTokens())
-			userData.put(stringTokenizer.nextToken(), new String[]{stringTokenizer.nextToken(), stringTokenizer.nextToken(), stringTokenizer.nextToken()});
-		//String[] test = userData.get("김건호");
-		//System.out.println(userData.keySet().iterator().next().getClass());
-		System.out.println(userData.get(userData.keySet().iterator().next().toString())[0]);
-		System.out.println((userData.get("abc") == null));
-		
+		{
+			String[] temp = stringTokenizer.nextToken().split("/");
+			userData.put(temp[0], new String[]{temp[1], temp[2], temp[3]});
+		}	
 	}
 }
