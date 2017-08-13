@@ -50,6 +50,9 @@ public class MyTimer {
 			drivingTime = 300000 - (drivingEndTime - drivingStartTime);
 			if (drivingTime < 0) {
 				ControlFrame.mainStartStopButton.doClick();
+				ControlFrame.subStartStopButton.doClick();
+				mainTime = "05:00:00";
+				
 			} else {
 				mainTimeMinute = (int) (drivingTime / 60000);
 				mainTimeSecond = (int) ((drivingTime / 1000) % 60);
