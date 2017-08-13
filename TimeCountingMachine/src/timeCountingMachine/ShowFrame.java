@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
 public class ShowFrame extends JFrame {
-	private JPanel totalDrivingTimerPanel = new JPanel(new GridLayout(1,1));
+	private JPanel totalDrivingTimerPanel = new JPanel(new GridLayout(1, 1));
 	private JPanel lapTimerPanel = new JPanel();
 	private JPanel personPanel = new JPanel();
 	private JLabel currentNameLabel = new JLabel();
@@ -47,8 +47,6 @@ public class ShowFrame extends JFrame {
 		gbl.setConstraints(c, gbc);
 		this.add(c);
 	}
-	
-
 
 	public ShowFrame() {
 		super("Show");
@@ -62,23 +60,24 @@ public class ShowFrame extends JFrame {
 		// layout
 		gbc.fill = GridBagConstraints.BOTH;
 		this.setLayout(gbl);
-		
-		//gridboxlayout
-		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 2, 1);
-		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 2, 1);
-		addGrid(gbl, gbc, rankTable, 2, 0, 1, 3, 1, 1);
+
+		// gridboxlayout
+		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 3, 1);
+		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 3, 1);
+		addGrid(gbl, gbc, rankTable, 3, 0, 1, 3, 1, 1);
 		addGrid(gbl, gbc, currentNameLabel, 0, 2, 1, 1, 1, 1);
+		addGrid(gbl, gbc, recordPanel, 1, 2, 1, 1, 2, 1);
 		// mainPanel.add(totalDrivingTimerPanel);
 		// mainPanel.add(lapTimerPanel);
 		// mainPanel.add(personPanel);
 
 		totalDrivingTimerPanel.add(totalDrivingTimerLabel);
 		lapTimerPanel.add(lapTimerLabel);
-		
+
 		// Property
 		totalDrivingTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lapTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
- 
+
 		// this.add(mainPanel);
 		this.setVisible(true);
 	}
