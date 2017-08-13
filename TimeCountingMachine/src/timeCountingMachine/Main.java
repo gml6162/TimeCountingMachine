@@ -11,6 +11,6 @@ public class Main {
 		ShowFrame showFrame = new ShowFrame();
 		ControlFrame ctrlFrame = new ControlFrame();
 		FileManager.saveData(); // for output test
-		FileManager.loadUserData(); // for input test
+		userData = FileManager.loadUserData(); // for input test
 	}
 }
