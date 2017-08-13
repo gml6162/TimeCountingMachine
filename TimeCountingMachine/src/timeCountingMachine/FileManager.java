@@ -2,6 +2,7 @@ package timeCountingMachine;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.HashMap;
 import java.util.StringTokenizer;
 
 /*
@@ -27,11 +28,11 @@ public class FileManager
 		}
 	}
 
-	public static HashMap<String, Object> loadUserData()
+	public static HashMap<String, String[]> loadUserData()
 	{
 		StringBuffer buffer = new StringBuffer();
 		FileReader reader;
-		HashMap<String, Object> userData = new HashMap<String, Object>();
+		HashMap<String, String[]> userData = new HashMap<String, String[]>();
 
 		try
 		{
@@ -55,7 +56,7 @@ public class FileManager
 		StringTokenizer stringTokenizer = new StringTokenizer(buffer.toString(), "\n", false);
 		while (stringTokenizer.hasMoreTokens())
 		{
-			userData.put(stringTokenizer.nextToken(), {stringTokenizer.nextToken(), stringTokenizer.nextToken(), stringTokenizer.nextToken()});
+			userData.put(stringTokenizer.nextToken(), new String[]{stringTokenizer.nextToken(), stringTokenizer.nextToken(), stringTokenizer.nextToken()});
 		}
 		return userData;
 	}
