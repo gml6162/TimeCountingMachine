@@ -1,34 +1,24 @@
 package timeCountingMachine;
 
 import java.awt.GridBagConstraints;
-
 import java.awt.GridBagLayout;
-
 import java.awt.GridLayout;
-
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Timer;
-
 import java.util.TimerTask;
 
 import javax.swing.JButton;
-
 import javax.swing.JFrame;
-
 import javax.swing.JLabel;
-
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
-
 import javax.swing.SwingConstants;
 
 import timeCountingMachine.MyTimer.reverseTimer;
-
 import timeCountingMachine.MyTimer.sequenceTimer;
 
 public class ControlFrame extends JFrame {
@@ -61,10 +51,10 @@ public class ControlFrame extends JFrame {
 
 	private void setUserDataPanel() {
 		String[] columnNames = { "Name", "Time" };
-		String[][] data = new String[Main.userData.size()][2];
+		String[][] data = new String[FileManager.userData.size()][2];
 		int i = 0;
 		
-		Set<String> key = Main.userData.keySet();
+		Set<String> key = FileManager.userData.keySet();
 		
 		for(Iterator<String> iterator = key.iterator();iterator.hasNext();){
 			//key name

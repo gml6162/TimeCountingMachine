@@ -36,7 +36,7 @@ public class UserDataInputFrame extends JFrame{
 					{
 						return;
 					}
-					Main.userData.put(nameField.getText(), 0l);
+					FileManager.userData.put(nameField.getText(), 0l);
 					nameField.setText("");
 				}
 			}
@@ -46,7 +46,7 @@ public class UserDataInputFrame extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					System.out.println(Main.userData.size());
+					System.out.println(FileManager.userData.size());
 					dispose();
 					ShowFrame showFrame = new ShowFrame();
 					ControlFrame ctrlFrame = new ControlFrame();
