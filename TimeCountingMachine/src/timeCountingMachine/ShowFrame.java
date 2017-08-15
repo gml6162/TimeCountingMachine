@@ -21,7 +21,6 @@ public class ShowFrame extends JFrame {
 	private JPanel recordPanel = new JPanel(new GridLayout(3,1));
 	private JTable rankTable = new JTable();
 
-
 	private JLabel nameLabel = new JLabel();
 	private JLabel robotNameLabel = new JLabel();
 	private JLabel schoolLabel = new JLabel();
@@ -30,10 +29,11 @@ public class ShowFrame extends JFrame {
 	private JLabel record2Label = new JLabel();
 	private JLabel record3Label = new JLabel();
 	
+	private String currentUser = "";
+	
 	private Long record1 = (long) 300000;
 	private Long record2 = (long) 300000;
 	private Long record3 = (long) 300000;
-	
 	
 	private JLabel totalDrivingTimerLabel = new JLabel("05:00:00");
 	private JLabel lapTimerLabel = new JLabel("00:00:00");
@@ -57,16 +57,14 @@ public class ShowFrame extends JFrame {
 			record3 = record2;
 			record2 = record1;			
 			record1 = record;
-
 		}
-		else if(record < record2) {
+		else if (record < record2) {
 			record3 = record2;
 			record2 = record;
 		} 
 		else if (record < record3) {
 			record3 = record;
 		}
-		
 		
 		record1TimeMinute = (int) (record1 / 60000);
 		record1TimeSecond = (int) ((record1 / 1000) % 60);
@@ -83,9 +81,11 @@ public class ShowFrame extends JFrame {
 		record3TimeMillisec = (int) ((record3 / 10) % 100);
 		record3Label.setText(String.format("%02d:%02d:%02d", record3TimeMinute, record3TimeSecond, record3TimeMillisec));
 		
+		FileManager.setUserRecord(currentUser, record);
 	}
 
 	public void setcurrentNamePanel(String key){
+		currentUser = key;
 		nameLabel.setText("이름 : "+key);
 		robotNameLabel.setText("로봇 이름 : " + FileManager.userData.get(key)[0].toString());
 		schoolLabel.setText("학교 : " + FileManager.userData.get(key)[1].toString());
@@ -110,8 +110,6 @@ public class ShowFrame extends JFrame {
 		this.setBounds(100, 200, 300, 300);
 		this.initalize();
 	}
-	
-
 
 	private void initalize() {
 		this.setVisible(false);
@@ -119,9 +117,6 @@ public class ShowFrame extends JFrame {
 		gbc.fill = GridBagConstraints.BOTH;
 		this.setLayout(gbl);
 
-		
-		
-		
 		// gridboxlayout
 		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 3, 1);
 		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 3, 1);
@@ -152,5 +147,4 @@ public class ShowFrame extends JFrame {
 		// this.add(mainPanel);
 		this.setVisible(true);
 	}
-
 }

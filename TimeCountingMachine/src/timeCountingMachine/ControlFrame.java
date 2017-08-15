@@ -65,31 +65,19 @@ public class ControlFrame extends JFrame {
 		this.setDefaultCloseOperation(ControlFrame.EXIT_ON_CLOSE);
 		this.setBounds(400, 200, 300, 300);
 		this.initialize();
-	}
-	
-	
+	}	
 
 	private void setUserDataPanel() {
 		String[] columnNames = { "Name", "Time" };
 		String[][] data = new String[FileManager.userData.size()][2];
 		int i = 0;
 		
-		Set<String> key = FileManager.userData.keySet();
+		Set<String> keys = FileManager.userData.keySet();
 		
-		for(Iterator<String> iterator = key.iterator();iterator.hasNext();){
-			//key name
-			String keyName = (String) iterator.next();
-
-			data[i][0] = keyName;
-			i++;
-			
+		for(Iterator<String> iterator = keys.iterator();iterator.hasNext();){
+			data[i++][0] = (String) iterator.next();//key name
 		}
-		
-		
-
 		userDataTable = new JTable(data, columnNames);
-		
-
 	}
 	
 	private void Signal(char sign) {
@@ -104,7 +92,6 @@ public class ControlFrame extends JFrame {
 		}
 	}
 	
-
 	private void initialize() {
 
 		this.setVisible(false);
@@ -126,7 +113,6 @@ public class ControlFrame extends JFrame {
 		subButtonPanel.add(breakButton);
 		userDataPanel.add(userDataTable);
 		
-
 		// subButtonPanel.add(subStopButton);
 		switchPersonPanel.add(upButton);
 		switchPersonPanel.add(downButton);
@@ -138,8 +124,6 @@ public class ControlFrame extends JFrame {
 		subButtonLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		// event
-
-
 		setBreakButton breakButtonListener = timer.new setBreakButton();
 		setDelayButton delayButtonListener = timer.new setDelayButton();
 		reverseTimer mainActionListener = timer.new reverseTimer();
@@ -185,8 +169,5 @@ public class ControlFrame extends JFrame {
 		mainPanel.setVisible(true);
 		this.add(mainPanel);
 		this.setVisible(true);
-
 	}
-
 }
-

@@ -3,6 +3,8 @@ package timeCountingMachine;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.StringTokenizer;
 
 /*
@@ -13,6 +15,14 @@ import java.util.StringTokenizer;
 public class FileManager
 {
 	public static HashMap<String, String[]> userData;
+	private static HashMap<String, String[]> userRecordData;
+	
+	public static void setUserRecord(String user, long record)
+	{
+		String[] temp = userRecordData.get(user);
+		userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], String.valueOf(record)});
+		saveData();
+	}
 	
 	public static void saveData()
 	{
@@ -20,8 +30,25 @@ public class FileManager
 		try
 		{
 			reader = new FileWriter("savedData.txt");
-			reader.write("test");
-			//reader.append('!');
+			String string = "DATA\n";
+			Set<String> keys = FileManager.userData.keySet();
+			
+			for(Iterator<String> iterator = keys.iterator(); iterator.hasNext(); ){
+				String user = iterator.next();
+				String[] value = userRecordData.get(user);
+				string = string
+						.concat(user)
+						.concat("\t")
+						.concat(value[0])
+						.concat("\t")
+						.concat(value[1])
+						.concat("\t")
+						.concat(value[2])
+						.concat("\t")
+						.concat(longToString(Long.parseLong(value[3])))
+						.concat("\n");
+			}
+			reader.write(string);
 			reader.close();
 		}
 		catch (Exception exception)
@@ -35,7 +62,8 @@ public class FileManager
 		FileReader reader;
 		StringBuffer buffer = new StringBuffer();
 		userData = new HashMap<String, String[]>();
-
+		userRecordData = new HashMap<String, String[]>();
+		
 		try
 		{
 			reader = new FileReader(textFile);
@@ -58,6 +86,16 @@ public class FileManager
 		{
 			String[] temp = stringTokenizer.nextToken().split("/");
 			userData.put(temp[0], new String[]{temp[1], temp[2], temp[3]});
-		}	
+			userRecordData.put(temp[0], new String[]{temp[1], temp[2], temp[3], "0"});
+		}
+	}
+	
+	private static String longToString(long time)
+	{
+		long ms = time % 1000;
+		long se = (time / 1000) % 60;
+		long mi = (time / (1000 * 60)) % 60;
+
+		return String.format("%02d분 %02d초 %03d", mi, se, ms);
 	}
 }

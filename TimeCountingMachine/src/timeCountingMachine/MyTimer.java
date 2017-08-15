@@ -107,9 +107,6 @@ public class MyTimer {
 				drivingEndTime = System.currentTimeMillis();
 				drivingTime = drivingEndTime - drivingStartTime;
 				System.out.println(String.valueOf(drivingTime));
-				
-				
-				
 			}
 		}
 	}
@@ -137,7 +134,6 @@ public class MyTimer {
 					
 					//sign P//test
 					showFrame.setRecordLabel(lapTime);
-					
 			}
 		}
 	}
