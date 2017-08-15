@@ -11,5 +11,7 @@ public class Main {
 		// Show frames.
 		ShowFrame showFrame = new ShowFrame();
 		ControlFrame ctrlFrame = new ControlFrame();
+		ctrlFrame.showFrame = showFrame;
+		ctrlFrame.link();
 	}
 }

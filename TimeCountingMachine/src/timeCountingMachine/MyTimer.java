@@ -36,14 +36,18 @@ public class MyTimer {
 	private long lapStartTime;
 	private long lapEndTime;
 	private long lapTime;
+	private static long totalTime = 300000;
+	
+	//test
+	public ShowFrame showFrame;
 
 	class MainTimerTask extends TimerTask {
 		@Override
 		public void run() {
-			ShowFrame.setTotalDrivingTimerLabel(mainTime);
+			showFrame.setTotalDrivingTimerLabel(mainTime);
 
 			drivingEndTime = (long) System.currentTimeMillis();
-			drivingTime = 300000 - (drivingEndTime - drivingStartTime);
+			drivingTime = totalTime - (drivingEndTime - drivingStartTime);
 			//drivingTime = 300 - (drivingEndTime - drivingStartTime);
 			if (drivingTime < 0) {
 				ControlFrame.mainStartStopButton.doClick();
@@ -51,8 +55,8 @@ public class MyTimer {
 				if(ControlFrame.subStartStopButton.getText().equals("STOP")){
 					ControlFrame.subStartStopButton.doClick();
 				}
-				ShowFrame.setTotalDrivingTimerLabel("00:00:00");
-				ShowFrame.setLapTimerLabel("00:00:00");
+				showFrame.setTotalDrivingTimerLabel("00:00:00");
+				showFrame.setLapTimerLabel("00:00:00");
 
 			} else {
 				mainTimeMinute = (int) (drivingTime / 60000);
@@ -69,13 +73,13 @@ public class MyTimer {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			ShowFrame.setLapTimerLabel(subTime);
+			showFrame.setLapTimerLabel(subTime);
 
 			lapEndTime = (long) System.currentTimeMillis();
-			lapTime = lapEndTime - lapStartTime;
-			subTimeMinute = (int) (lapTime / 60000);
-			subTimeSecond = (int) ((lapTime / 1000) % 60);
-			subTimeMillisec = (int) ((lapTime / 10) % 100);
+			setLapTime(lapEndTime - lapStartTime);
+			subTimeMinute = (int) (getLapTime() / 60000);
+			subTimeSecond = (int) ((getLapTime() / 1000) % 60);
+			subTimeMillisec = (int) ((getLapTime() / 10) % 100);
 			subTime = String.format("%02d:%02d:%02d", subTimeMinute, subTimeSecond, subTimeMillisec);
 		}
 	};
@@ -94,6 +98,8 @@ public class MyTimer {
 				drivingStartTime = (long) System.currentTimeMillis();
 				mainTimer = new Timer();
 				mainTimer.schedule(new MainTimerTask(), 0, 50);
+
+				System.out.println(totalTime);
 				// drivingStartTime = System.currentTimeMillis();
 			} else {
 				b.setText("START");
@@ -101,6 +107,9 @@ public class MyTimer {
 				drivingEndTime = System.currentTimeMillis();
 				drivingTime = drivingEndTime - drivingStartTime;
 				System.out.println(String.valueOf(drivingTime));
+				
+				
+				
 			}
 		}
 	}
@@ -123,12 +132,49 @@ public class MyTimer {
 					b.setText("START");
 					lapEndTime = System.currentTimeMillis();
 					lapTime = lapEndTime - lapStartTime;
+					setLapTime(lapTime);
 					subTimer.cancel();
-				}
+					
+					//sign P//test
+					showFrame.setRecordLabel(lapTime);
+					
 			}
 		}
-		
 	}
+	
+	class setDelayButton implements ActionListener {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			totalTime = 295000;
+			System.out.println(totalTime);
+		}
+	}
+	
+	class setBreakButton implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			totalTime -= 5000;//5 second	5*1000
+			ControlFrame.subStartStopButton.doClick();
+			System.out.println("break");
+			
+		}
+	}
+
+	public long getLapTime() {
+		return lapTime;
+	}
+
+	private void setLapTime(long lapTime) {
+		this.lapTime = lapTime;
+	}
+
+}
+
+	
 
 	/*
 	 * mainStartStopButton.addActionListener(new ActionListener() {

@@ -5,6 +5,9 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Timer;
@@ -17,11 +20,18 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import timeCountingMachine.MyTimer.reverseTimer;
 import timeCountingMachine.MyTimer.sequenceTimer;
+import timeCountingMachine.MyTimer.setBreakButton;
+import timeCountingMachine.MyTimer.setDelayButton;
+
 
 public class ControlFrame extends JFrame {
+	
+	public ShowFrame showFrame;
 
 	private JPanel mainButtonPanel = new JPanel(new GridLayout(3, 1, 0, 5));
 	private JPanel subButtonPanel = new JPanel(new GridLayout(3, 1, 0, 5));
@@ -34,15 +44,30 @@ public class ControlFrame extends JFrame {
 
 	private JButton upButton = new JButton("up");
 	private JButton downButton = new JButton("down");
+	private JButton delayButton = new JButton("delay");
+	private JButton breakButton = new JButton("break");
 	private JLabel mainButtonLabel = new JLabel("total driving time");
 	private JLabel subButtonLabel = new JLabel("lap time");
 
+	private JTable userDataTable;
+	
+	private String currentName;
+	
+	private MyTimer timer = new MyTimer();
+	
+	//test
+	void link() {
+		timer.showFrame = showFrame;
+	}
+	
 	public ControlFrame() {
 		super("Control");
 		this.setDefaultCloseOperation(ControlFrame.EXIT_ON_CLOSE);
 		this.setBounds(400, 200, 300, 300);
 		this.initialize();
 	}
+	
+	
 
 	private void setUserDataPanel() {
 		String[] columnNames = { "Name", "Time" };
@@ -54,7 +79,6 @@ public class ControlFrame extends JFrame {
 		for(Iterator<String> iterator = key.iterator();iterator.hasNext();){
 			//key name
 			String keyName = (String) iterator.next();
-			
 
 			data[i][0] = keyName;
 			i++;
@@ -63,10 +87,23 @@ public class ControlFrame extends JFrame {
 		
 		
 
-		JTable userDataTable = new JTable(data, columnNames);
+		userDataTable = new JTable(data, columnNames);
 		
-		userDataPanel.add(userDataTable);
+
 	}
+	
+	private void Signal(char sign) {
+		//start signal
+		if(sign == 's') {
+			subStartStopButton .doClick();		
+		}
+		//stop signal
+		if(sign == 'p') {
+			subStartStopButton.doClick();
+			System.out.println(timer.getLapTime());
+		}
+	}
+	
 
 	private void initialize() {
 
@@ -85,7 +122,9 @@ public class ControlFrame extends JFrame {
 		mainButtonPanel.add(mainStartStopButton);
 		// mainButtonPanel.add(mainStopButton);
 		subButtonPanel.add(subStartStopButton);
-		
+		mainButtonPanel.add(delayButton);
+		subButtonPanel.add(breakButton);
+		userDataPanel.add(userDataTable);
 		
 
 		// subButtonPanel.add(subStopButton);
@@ -100,12 +139,44 @@ public class ControlFrame extends JFrame {
 
 		// event
 
-		reverseTimer mainActionListener = new MyTimer().new reverseTimer();
-		sequenceTimer subActionLisener = new MyTimer().new sequenceTimer();
 
+		setBreakButton breakButtonListener = timer.new setBreakButton();
+		setDelayButton delayButtonListener = timer.new setDelayButton();
+		reverseTimer mainActionListener = timer.new reverseTimer();
+		sequenceTimer subActionLisener = timer.new sequenceTimer();
+		
 		mainStartStopButton.addActionListener(mainActionListener);
 		subStartStopButton.addActionListener(subActionLisener);
+		delayButton.addActionListener(delayButtonListener);
+		breakButton.addActionListener(breakButtonListener);
+		userDataTable.addMouseListener(new MouseListener(){
 
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				int column, row;
+				JTable jt = (JTable) e.getSource();
+				row = jt.getSelectedRow();
+				column = jt.getSelectedColumn();
+				currentName = (String)userDataTable.getValueAt(row, column);
+				showFrame.setcurrentNamePanel(currentName);
+				System.out.println(currentName);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+		});
+		
 		// this.setLayout(new BoxLayout(this.getContentPane(),
 		// BoxLayout.X_AXIS));
 		// mainPanel.setLayout(new BoxLayout(this.getContentPane(),
@@ -118,3 +189,4 @@ public class ControlFrame extends JFrame {
 	}
 
 }
+
