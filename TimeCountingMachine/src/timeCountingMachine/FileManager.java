@@ -23,15 +23,8 @@ public class FileManager
 	public static void setUserRecord(String user, long record)
 	{
 		String[] temp = userRecordData.get(user);
-		userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], longToString(record)});
-		
-		
+		userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], longToString(record)});		
 		saveData();
-	}
-	
-	public static void setBackupRanking(long record)
-	{
-		
 	}
 	
 	public static void saveData()
@@ -130,7 +123,7 @@ public class FileManager
 				System.out.print("Maybe not found: " + user_names_file);
 				e.printStackTrace();
 			}
-		}		
+		}
 	}
 	
 	private static String longToString(long time)
