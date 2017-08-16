@@ -30,6 +30,9 @@ public class ShowFrame extends JFrame {
 	private JLabel record3Label = new JLabel();
 	
 	private String currentUser = "";
+	private String[] rankColumnNames = {"Names", "Time"};
+	private String[][] rankData = new String[12][2];
+	
 	
 	private Long record1 = (long) 300000;
 	private Long record2 = (long) 300000;
@@ -51,7 +54,6 @@ public class ShowFrame extends JFrame {
 	}
 	
 	public void setRecordLabel(long record) {
-		int record1TimeMinute, record1TimeSecond, record1TimeMillisec, record2TimeMinute, record2TimeSecond, record2TimeMillisec, record3TimeMinute, record3TimeSecond, record3TimeMillisec;
 		
 		if(record < record1) {
 			record3 = record2;
@@ -66,30 +68,63 @@ public class ShowFrame extends JFrame {
 			record3 = record;
 		}
 		
-		record1TimeMinute = (int) (record1 / 60000);
-		record1TimeSecond = (int) ((record1 / 1000) % 60);
-		record1TimeMillisec = (int) ((record1 / 10) % 100);
-		record1Label.setText(String.format("%02d:%02d:%02d", record1TimeMinute, record1TimeSecond, record1TimeMillisec));
-
-		record2TimeMinute = (int) (record2 / 60000);
-		record2TimeSecond = (int) ((record2 / 1000) % 60);
-		record2TimeMillisec = (int) ((record2 / 10) % 100);
-		record2Label.setText(String.format("%02d:%02d:%02d", record2TimeMinute, record2TimeSecond, record2TimeMillisec));
-		
-		record3TimeMinute = (int) (record3 / 60000);
-		record3TimeSecond = (int) ((record3 / 1000) % 60);
-		record3TimeMillisec = (int) ((record3 / 10) % 100);
-		record3Label.setText(String.format("%02d:%02d:%02d", record3TimeMinute, record3TimeSecond, record3TimeMillisec));
+		record1Label.setText(longToString(record1));
+		record2Label.setText(longToString(record2));
+		record3Label.setText(longToString(record3));
 		
 		FileManager.setUserRecord(currentUser, record);
 	}
-
+	
+	public void setRecordLabel() {
+		record1Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
+		record2Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
+		record3Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
+		
+	}
+	
 	public void setcurrentNamePanel(String key){
 		currentUser = key;
 		nameLabel.setText("이름 : "+key);
 		robotNameLabel.setText("로봇 이름 : " + FileManager.userData.get(key)[0].toString());
 		schoolLabel.setText("학교 : " + FileManager.userData.get(key)[1].toString());
 		fieldLabel.setText("분야 : "+ FileManager.userData.get(key)[2].toString());
+	
+		record1 = (long) 300000;
+		record2 = (long) 300000;
+		record3 = (long) 300000;
+		
+		setRecordLabel();
+	}
+	
+	public void setRankTable() {
+		int i = 0;
+		for(i = 0; i<12; i++) {
+			rankData[i][0] = "";
+			rankData[i][1] = "";
+			
+		}
+		
+		
+		rankTable = new JTable(rankData, rankColumnNames);
+		
+	}
+	
+	public void setRankTable(long record) {
+		int i = 0;
+		for(i=0; i<12; i++) {
+			if(rankData[i][0] == "") {
+				rankData[i][0] = currentUser;
+				rankData[i][1] = longToString(record);
+				System.out.println("null");
+				break;
+			}
+			else {
+				
+				//rankData[i][0]
+			}
+		}
+		System.out.println("setRank");
+		rankTable = new JTable(rankData, rankColumnNames);
 	}
 	
 	private void addGrid(GridBagLayout gbl, GridBagConstraints gbc, Component c, int gridx, int gridy, int gridwidth,
@@ -111,12 +146,24 @@ public class ShowFrame extends JFrame {
 		this.initalize();
 	}
 
+	private static String longToString(long time)
+	{
+		long ms = time % 1000;
+		long se = (time / 1000) % 60;
+		long mi = (time / (1000 * 60)) % 60;
+
+		return String.format("%02d:%02d:%02d", mi, se, ms);
+	}
+	
+	
+	
 	private void initalize() {
 		this.setVisible(false);
 		// layout
 		gbc.fill = GridBagConstraints.BOTH;
 		this.setLayout(gbl);
 
+		setRankTable();
 		// gridboxlayout
 		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 3, 1);
 		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 3, 1);
@@ -139,7 +186,7 @@ public class ShowFrame extends JFrame {
 		recordPanel.add(record1Label);
 		recordPanel.add(record2Label);
 		recordPanel.add(record3Label);
-
+		
 		// Property
 		totalDrivingTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lapTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);

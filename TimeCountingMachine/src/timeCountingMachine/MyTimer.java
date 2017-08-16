@@ -40,6 +40,7 @@ public class MyTimer {
 	
 	//test
 	public ShowFrame showFrame;
+	public ControlFrame ctrlFrame;
 
 	class MainTimerTask extends TimerTask {
 		@Override
@@ -134,6 +135,7 @@ public class MyTimer {
 					
 					//sign P//test
 					showFrame.setRecordLabel(lapTime);
+					showFrame.setRankTable(lapTime);
 			}
 		}
 	}

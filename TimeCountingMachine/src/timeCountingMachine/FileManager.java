@@ -21,7 +21,14 @@ public class FileManager
 	{
 		String[] temp = userRecordData.get(user);
 		userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], String.valueOf(record)});
+		
+		
 		saveData();
+	}
+	
+	public static void setBackupRanking(long record)
+	{
+		
 	}
 	
 	public static void saveData()
@@ -89,6 +96,11 @@ public class FileManager
 			userRecordData.put(temp[0], new String[]{temp[1], temp[2], temp[3], "0"});
 		}
 	}
+	
+	//public long getRecord(String user){
+	//	long record = userRecordData.get(user)[3];
+	//	return 
+	//}
 	
 	private static String longToString(long time)
 	{

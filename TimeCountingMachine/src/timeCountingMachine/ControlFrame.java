@@ -52,7 +52,12 @@ public class ControlFrame extends JFrame {
 	private JTable userDataTable;
 	
 	private String currentName;
+	private int row;
 	
+	public int getRow() {
+		return row;
+	}
+
 	private MyTimer timer = new MyTimer();
 	
 	//test
@@ -88,6 +93,7 @@ public class ControlFrame extends JFrame {
 		//stop signal
 		if(sign == 'p') {
 			subStartStopButton.doClick();
+			showFrame.setRecordLabel(timer.getLapTime());
 			System.out.println(timer.getLapTime());
 		}
 	}
@@ -138,11 +144,9 @@ public class ControlFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				int column, row;
 				JTable jt = (JTable) e.getSource();
 				row = jt.getSelectedRow();
-				column = jt.getSelectedColumn();
-				currentName = (String)userDataTable.getValueAt(row, column);
+				currentName = (String)userDataTable.getValueAt(row, 0);
 				showFrame.setcurrentNamePanel(currentName);
 				System.out.println(currentName);
 			}
