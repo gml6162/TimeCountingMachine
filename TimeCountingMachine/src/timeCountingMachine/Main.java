@@ -1,11 +1,12 @@
 package timeCountingMachine;
 
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 public class Main {
 	public static void main(String[] arguis) {
 		// File test and load data.
-		FileManager.loadUserData("userNames.txt");
+		FileManager.loadUserData();
 		FileManager.saveData();
 		
 		// Show frames.
