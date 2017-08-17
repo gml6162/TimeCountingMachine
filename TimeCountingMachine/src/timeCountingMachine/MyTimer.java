@@ -136,6 +136,7 @@ public class MyTimer {
 					//sign P//test
 					showFrame.setRecordLabel(lapTime);
 					showFrame.setRankTable(lapTime);
+					
 			}
 		}
 	}
