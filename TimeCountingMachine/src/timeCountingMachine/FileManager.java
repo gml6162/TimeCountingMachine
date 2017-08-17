@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -22,14 +23,47 @@ public class FileManager
 	private static String USER_NAMES_FILE = "userNames.txt";
 	private static String SAVED_DATA_FILE = "savedData.txt";
 	
-	public static HashMap<String, String[]> userData;
-	private static HashMap<String, String[]> userRecordData;
-	
+	public static HashMap<String, String[]> userData = new HashMap<String, String[]>();
+	private static HashMap<String, String[]> userRecordData = new HashMap<String, String[]>();
+	private static ArrayList<String[]> rankData = new ArrayList<>();
+
 	public static void setUserRecord(String user, long record)
 	{
 		String[] temp = userRecordData.get(user);
 		userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], longToString(record)});		
 		saveData();
+		setRankData();
+	}
+	
+	public static void setRankData()
+	{
+		rankData = new ArrayList<>();
+		Set<String> keys = FileManager.userRecordData.keySet();
+		String name;
+		int i;
+		long time;
+		for(Iterator<String> iterator = keys.iterator(); iterator.hasNext(); )
+		{
+			name = iterator.next();
+			time = stringToLong(userRecordData.get(name)[3]);
+			for (i = 0; i < rankData.size(); i++)
+			{
+				if (time < stringToLong(rankData.get(i)[1]) )
+				{
+					rankData.add(i, new String[] {name, userRecordData.get(name)[3]});
+					break;
+				}
+			}
+			if (i == rankData.size())
+			{
+				rankData.add(i, new String[] {name, userRecordData.get(name)[3]});
+			}
+		}
+	}
+	
+	public static ArrayList<String[]> getRankData()
+	{
+		return rankData;
 	}
 	
 	public static void saveData()
