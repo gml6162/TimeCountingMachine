@@ -5,6 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,8 +32,7 @@ public class ShowFrame extends JFrame {
 	
 	private String currentUser = "";
 	private String[] rankColumnNames = {"Names", "Time"};
-	private String[][] rankData = new String[12][2];
-	
+	private String[][] rankData = String[12][2];
 	
 	private Long record1 = (long) 300000;
 	private Long record2 = (long) 300000;
@@ -101,6 +101,7 @@ public class ShowFrame extends JFrame {
 		for(i = 0; i<12; i++) {
 			rankData[i][0] = "";
 			rankData[i][1] = "";
+			//rankData[i][1] = "";
 			
 		}
 		
