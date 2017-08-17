@@ -61,9 +61,13 @@ public class FileManager
 		}
 	}
 	
-	public static ArrayList<String[]> getRankData()
+	public static String[][] getRankDataAsStringArray()
 	{
-		return rankData;
+		String[][] returns = new String[rankData.size()][2];
+		int i = 0;
+		for(String[] strings : rankData)
+			returns[i++] = strings;
+		return returns;
 	}
 	
 	public static void saveData()
