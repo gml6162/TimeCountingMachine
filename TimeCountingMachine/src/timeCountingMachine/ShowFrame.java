@@ -32,7 +32,7 @@ public class ShowFrame extends JFrame {
 	
 	private String currentUser = "";
 	private String[] rankColumnNames = {"Names", "Time"};
-	private String[][] rankData = String[12][2];
+	private String[][] rankData = new String[12][2];
 	
 	private Long record1 = (long) 300000;
 	private Long record2 = (long) 300000;
