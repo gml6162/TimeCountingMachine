@@ -98,6 +98,7 @@ public class ControlFrame extends JFrame {
 		}
 	}
 	
+	
 	private void initialize() {
 
 		this.setVisible(false);

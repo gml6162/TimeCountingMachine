@@ -111,20 +111,13 @@ public class ShowFrame extends JFrame {
 	
 	public void setRankTable(long record) {
 		int i = 0;
+		System.out.println(record);
 		for(i=0; i<12; i++) {
-			if(rankData[i][0] == "") {
-				rankData[i][0] = currentUser;
-				rankData[i][1] = longToString(record);
-				System.out.println("null");
-				break;
-			}
-			else {
-				
-				//rankData[i][0]
-			}
+			
 		}
 		System.out.println("setRank");
 		rankTable = new JTable(rankData, rankColumnNames);
+		rankTable.updateUI();
 	}
 	
 	private void addGrid(GridBagLayout gbl, GridBagConstraints gbc, Component c, int gridx, int gridy, int gridwidth,
@@ -154,6 +147,12 @@ public class ShowFrame extends JFrame {
 
 		return String.format("%02d:%02d:%02d", mi, se, ms);
 	}
+	
+	private long stringToLong(String time)
+	{
+		return Long.parseLong(time.substring(0, 2)) * 60000 + Long.parseLong(time.substring(3, 5)) * 1000 + Long.parseLong(time.substring(6, 9));
+	}
+	
 	
 	
 	
