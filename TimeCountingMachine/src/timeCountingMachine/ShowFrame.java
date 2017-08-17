@@ -113,17 +113,7 @@ public class ShowFrame extends JFrame {
 		int i = 0;
 		System.out.println(record);
 		for(i=0; i<12; i++) {
-			if(rankData[i][0] == "") {
-				rankData[i][0] = currentUser;
-				rankData[i][1] = longToString(record);
-				System.out.println(stringToLong(rankData[i][1]));
-				System.out.println("null");
-				break;
-			}
-			else {
-				
-				//rankData[i][0]
-			}
+			
 		}
 		System.out.println("setRank");
 		rankTable = new JTable(rankData, rankColumnNames);
