@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
 /*
  * This class only has static method.
  * You must not create FileManager as object.
+ * Written by GF
  */
 
 public class FileManager
