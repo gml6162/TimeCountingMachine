@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -33,30 +34,32 @@ public class FileManager
 	
 	public static void saveData()
 	{
-		BufferedWriter bufferedWriter = null;
+		//BufferedWriter writer = null;
+		FileWriter writer;
 		try
 		{
-			bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(SAVED_DATA_FILE), "UTF8"));
+			writer = new FileWriter(SAVED_DATA_FILE);
+			//writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(SAVED_DATA_FILE), "UTF8"));
 			String string = "";
 			Set<String> keys = FileManager.userData.keySet();
-			
+			writer.write(string);
 			for(Iterator<String> iterator = keys.iterator(); iterator.hasNext(); ){
 				String user = iterator.next();
 				String[] value = userRecordData.get(user);
-				string = string
+				string = new String()
 						.concat(user)
-						.concat("\t")
+						.concat("/")
 						.concat(value[0])
-						.concat("\t")
+						.concat("/")
 						.concat(value[1])
-						.concat("\t")
+						.concat("/")
 						.concat(value[2])
-						.concat("\t")
+						.concat("/")
 						.concat(value[3])
-						.concat("\n");
+						.concat(System.lineSeparator());
+				writer.append(string);
 			}
-			bufferedWriter.write(string);
-			bufferedWriter.close();
+			writer.close();
 		}
 		catch (Exception exception)
 		{
@@ -85,16 +88,16 @@ public class FileManager
 			{
 				buffer.append((char) read);
 				System.out.print((char) read);
+				System.out.print(read);
 			}
 			reader.close();
 			
 			stringTokenizer = new StringTokenizer(buffer.toString());
 			while (stringTokenizer.hasMoreTokens())
 			{
-				String key = stringTokenizer.nextToken();
-				String[] temp = {stringTokenizer.nextToken(),stringTokenizer.nextToken(),stringTokenizer.nextToken(),stringTokenizer.nextToken()};
-				userData.put(key, new String[]{temp[0], temp[1], temp[2]});
-				userRecordData.put(key, new String[]{temp[0], temp[1], temp[2], temp[3]});
+				String[] temp = stringTokenizer.nextToken().split("/");
+				userData.put(temp[0], new String[]{temp[1], temp[2], temp[3]});
+				userRecordData.put(temp[0], new String[]{temp[1], temp[2], temp[3], temp[4]});
 			}
 			System.out.println("Backup user data.");
 		}
