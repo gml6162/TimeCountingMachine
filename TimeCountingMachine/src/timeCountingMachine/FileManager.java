@@ -1,7 +1,10 @@
 package timeCountingMachine;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -29,10 +32,10 @@ public class FileManager
 	
 	public static void saveData()
 	{
-		FileWriter reader;
+		BufferedWriter bufferedWriter = null;
 		try
 		{
-			reader = new FileWriter("savedData.txt");
+			bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(SAVED_DATA_FILE), "UTF8"));
 			String string = "";
 			Set<String> keys = FileManager.userData.keySet();
 			
@@ -51,8 +54,8 @@ public class FileManager
 						.concat(value[3])
 						.concat("\n");
 			}
-			reader.write(string);
-			reader.close();
+			bufferedWriter.write(string);
+			bufferedWriter.close();
 		}
 		catch (Exception exception)
 		{
