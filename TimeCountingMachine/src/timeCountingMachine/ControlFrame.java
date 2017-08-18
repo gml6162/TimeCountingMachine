@@ -114,9 +114,6 @@ public class ControlFrame extends JFrame {
 		this.setVisible(false);
 		this.setUserDataPanel();
 
-		// this.add(mainPanel);
-
-		// Container mainPanelcontainer = new Container();
 		mainPanel.add(mainButtonPanel);
 		mainPanel.add(subButtonPanel);
 		mainPanel.add(userDataPanel);
@@ -124,13 +121,11 @@ public class ControlFrame extends JFrame {
 		mainButtonPanel.add(mainButtonLabel);
 		subButtonPanel.add(subButtonLabel);
 		mainButtonPanel.add(mainStartStopButton);
-		// mainButtonPanel.add(mainStopButton);
 		subButtonPanel.add(subStartStopButton);
 		mainButtonPanel.add(delayButton);
 		subButtonPanel.add(breakButton);
 		userDataPanel.add(userDataTable);
 		
-		// subButtonPanel.add(subStopButton);
 		switchPersonPanel.add(upButton);
 		switchPersonPanel.add(downButton);
 

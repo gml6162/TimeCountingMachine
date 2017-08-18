@@ -118,25 +118,24 @@ public class MyTimer {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			JToggleButton b = (JToggleButton) e.getSource();
-				if (b.getText().equals("START")) {
-					b.setText("STOP");
-					subTimeMinute = 00;
-					subTimeSecond = 00;
-					subTimeMillisec = 00;
-					lapStartTime = (long) System.currentTimeMillis();
-					subTimer = new Timer();
-					subTimer.schedule(new subTimerTask(), 0, 50);
-				} else {
-					b.setText("START");
-					lapEndTime = System.currentTimeMillis();
-					lapTime = lapEndTime - lapStartTime;
-					setLapTime(lapTime);
-					subTimer.cancel();
-					
-					//sign P//test
-					showFrame.setRecordLabel(lapTime);
-					showFrame.setRankTable();
-					
+			if (b.getText().equals("START")) {
+				b.setText("STOP");
+				subTimeMinute = 00;
+				subTimeSecond = 00;
+				subTimeMillisec = 00;
+				lapStartTime = (long) System.currentTimeMillis();
+				subTimer = new Timer();
+				subTimer.schedule(new subTimerTask(), 0, 50);
+			} else {
+				b.setText("START");
+				lapEndTime = System.currentTimeMillis();
+				lapTime = lapEndTime - lapStartTime;
+				setLapTime(lapTime);
+				subTimer.cancel();
+				
+				//sign P//test
+				showFrame.setRecordLabel(lapTime);
+				showFrame.setRankTable();
 			}
 		}
 	}
@@ -170,34 +169,4 @@ public class MyTimer {
 	private void setLapTime(long lapTime) {
 		this.lapTime = lapTime;
 	}
-
 }
-
-	
-
-	/*
-	 * mainStartStopButton.addActionListener(new ActionListener() {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { // TODO
-	 * Auto-generated method stub JToggleButton b = (JToggleButton)
-	 * e.getSource(); if (b.getText().equals("START")) { b.setText("STOP");
-	 * mainTimeMinute = 05; mainTimeSecond = 00; mainTimeMillisec = 00;
-	 * drivingStartTime = (long) System.currentTimeMillis(); mainTimer = new
-	 * Timer(); mainTimer.schedule(new MainTimerTask(), 0, 50); //
-	 * drivingStartTime = System.currentTimeMillis(); } else {
-	 * b.setText("START"); mainTimer.cancel(); drivingEndTime =
-	 * System.currentTimeMillis(); drivingTime = drivingEndTime -
-	 * drivingStartTime; System.out.println(String.valueOf(drivingTime)); } }
-	 * });
-	 * 
-	 * subStartStopButton.addActionListener(new ActionListener() {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { // TODO
-	 * Auto-generated method stub JToggleButton b = (JToggleButton)
-	 * e.getSource(); if (b.getText().equals("START")) { b.setText("STOP");
-	 * subTimeMinute = 00; subTimeSecond = 00; subTimeMillisec = 00;
-	 * lapStartTime = (long) System.currentTimeMillis(); subTimer = new Timer();
-	 * subTimer.schedule(new subTimerTask(), 0, 50); } else {
-	 * b.setText("START"); lapEndTime = System.currentTimeMillis(); lapTime =
-	 * lapEndTime - lapStartTime; subTimer.cancel(); } } });
-	 */

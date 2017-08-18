@@ -65,7 +65,7 @@ public class ShowFrame extends JFrame {
 	}
 	
 	public void setRecordLabel(long record) {
-		if(record < record1) {
+		if (record < record1) {
 			record3 = record2;
 			record2 = record1;			
 			record1 = record;
