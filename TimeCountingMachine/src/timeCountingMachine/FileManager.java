@@ -131,7 +131,7 @@ public class FileManager
 			}
 			reader.close();
 			
-			stringTokenizer = new StringTokenizer(buffer.toString());
+			stringTokenizer = new StringTokenizer(buffer.toString(), System.lineSeparator());
 			while (stringTokenizer.hasMoreTokens())
 			{
 				String[] temp = stringTokenizer.nextToken().split("/");
@@ -156,7 +156,7 @@ public class FileManager
 				}
 				reader.close();
 				
-				stringTokenizer = new StringTokenizer(buffer.toString(), "\n");
+				stringTokenizer = new StringTokenizer(buffer.toString(), System.lineSeparator());
 				while (stringTokenizer.hasMoreTokens())
 				{
 					String[] temp = stringTokenizer.nextToken().split("/");
