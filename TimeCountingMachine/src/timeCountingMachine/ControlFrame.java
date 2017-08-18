@@ -22,6 +22,8 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import timeCountingMachine.MyTimer.reverseTimer;
 import timeCountingMachine.MyTimer.sequenceTimer;
@@ -82,7 +84,15 @@ public class ControlFrame extends JFrame {
 		for(Iterator<String> iterator = keys.iterator();iterator.hasNext();){
 			data[i++][0] = (String) iterator.next();//key name
 		}
-		userDataTable = new JTable(data, columnNames);
+		
+		TableModel model = new DefaultTableModel(data, columnNames)
+		{
+            public boolean isCellEditable(int row, int column)
+            {
+            	return false;
+            }
+		};
+		userDataTable = new JTable(model);
 	}
 	
 	private void Signal(char sign) {

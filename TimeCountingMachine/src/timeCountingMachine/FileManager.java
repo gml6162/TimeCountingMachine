@@ -30,9 +30,12 @@ public class FileManager
 	public static void setUserRecord(String user, long record)
 	{
 		String[] temp = userRecordData.get(user);
-		userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], longToString(record)});		
-		saveData();
-		setRankData();
+		if (record < stringToLong(userRecordData.get(user)[3]))
+		{
+			userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], longToString(record)});
+			saveData();
+			setRankData();
+		}
 	}
 	
 	public static void setRankData()
@@ -45,11 +48,10 @@ public class FileManager
 		for(Iterator<String> iterator = keys.iterator(); iterator.hasNext(); )
 		{
 			name = iterator.next();
-			//System.out.println(stringToLong(userRecordData.get(name)[3]));
 			time = stringToLong(userRecordData.get(name)[3]);
 			for (i = 0; i < rankData.size(); i++)
 			{
-				if (time < stringToLong(rankData.get(i)[1]) )
+				if (time < stringToLong(rankData.get(i)[1]))
 				{
 					rankData.add(i, new String[] {name, userRecordData.get(name)[3]});
 					break;
@@ -57,6 +59,7 @@ public class FileManager
 			}
 			if (i == rankData.size())
 			{
+				rankData.add(i, new String[] {name, userRecordData.get(name)[3]});
 			}
 		}
 	}
@@ -72,12 +75,10 @@ public class FileManager
 	
 	public static void saveData()
 	{
-		//BufferedWriter writer = null;
 		FileWriter writer;
 		try
 		{
 			writer = new FileWriter(SAVED_DATA_FILE);
-			//writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(SAVED_DATA_FILE), "UTF8"));
 			String string = "";
 			Set<String> keys = FileManager.userData.keySet();
 			writer.write(string);
@@ -137,6 +138,7 @@ public class FileManager
 				userData.put(temp[0], new String[]{temp[1], temp[2], temp[3]});
 				userRecordData.put(temp[0], new String[]{temp[1], temp[2], temp[3], temp[4]});
 			}
+			setRankData();
 			System.out.println("Backup user data.");
 		}
 		catch (Exception exception)
@@ -159,8 +161,9 @@ public class FileManager
 				{
 					String[] temp = stringTokenizer.nextToken().split("/");
 					userData.put(temp[0], new String[]{temp[1], temp[2], temp[3]});
-					userRecordData.put(temp[0], new String[]{temp[1], temp[2], temp[3], longToString(0)});
+					userRecordData.put(temp[0], new String[]{temp[1], temp[2], temp[3], longToString(300000)});
 				}
+				setRankData();
 				System.out.println("Hello.");
 			}
 			catch (Exception e)
@@ -172,16 +175,9 @@ public class FileManager
 	}
 	
 	private static String longToString(long time)
-	   {
-	      return String.format("%02d분%02d초%03d", time / 60000, (time / 1000) % 60, time % 1000);
-	   }
-	//private static String longToString(long time)
-	
-	/*{
-		
-		return String.format("%02d분%02d초%03d", (time / (1000 * 60)) % 60,  (time / 1000) % 60, time % 1000);
-		//return String.format("%02d분%02d초%03d", time % 1000, (time / 1000) % 60, (time / (1000 * 60)) % 60);
-	}*/
+	{
+		return String.format("%02d분%02d초%03d", time / 60000, (time / 1000) % 60, time % 1000);
+	}
 	
 	private static long stringToLong(String time)
 	{

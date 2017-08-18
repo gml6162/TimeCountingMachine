@@ -14,17 +14,15 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class ShowFrame extends JFrame {
-	
-
 	
 	private JPanel totalDrivingTimerPanel = new JPanel(new GridLayout(1, 1));
 	private JPanel lapTimerPanel = new JPanel();
 	private JPanel personPanel = new JPanel();
 	private JPanel currentNamePanel = new JPanel(new GridLayout(4,1));
 	private JPanel recordPanel = new JPanel(new GridLayout(3,1));
-
 
 	private JLabel nameLabel = new JLabel();
 	private JLabel robotNameLabel = new JLabel();
@@ -45,8 +43,15 @@ public class ShowFrame extends JFrame {
 	private JLabel totalDrivingTimerLabel = new JLabel("05:00:00");
 	private JLabel lapTimerLabel = new JLabel("00:00:00");
 	
-	private DefaultTableModel model = new DefaultTableModel(rankData, rankColumnNames);
+	private DefaultTableModel model = new DefaultTableModel(rankData, rankColumnNames)
+	{
+        public boolean isCellEditable(int row, int column)
+        {
+        	return false;
+        }
+	};
 	private JTable rankTable = new JTable(model);
+	
 	// layout
 	GridBagLayout gbl = new GridBagLayout();
 	GridBagConstraints gbc = new GridBagConstraints();
@@ -60,7 +65,6 @@ public class ShowFrame extends JFrame {
 	}
 	
 	public void setRecordLabel(long record) {
-		
 		if(record < record1) {
 			record3 = record2;
 			record2 = record1;			
@@ -85,7 +89,6 @@ public class ShowFrame extends JFrame {
 		record1Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
 		record2Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
 		record3Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
-		
 	}
 	
 	public void setcurrentNamePanel(String key){
@@ -117,8 +120,16 @@ public class ShowFrame extends JFrame {
 	public void setRankTable() {
 		System.out.println("rank");
 		rankData = FileManager.getRankDataAsStringArray();
+		int i = 0;
+		for (String[] strings : rankData)
+		{
+			//model.insertRow(i, new String[]{strings[0], strings[1]});
+			model.setValueAt(strings[0], i, 0);
+			model.setValueAt(strings[1], i, 1);
+			i++;
+		}
+		//model.insertRow(1, new String[][]{{"test"},{"success"}});
 		model.fireTableDataChanged();
-		model.insertRow(1, new String[][]{{"test"},{"success"}});
 		rankTable.updateUI();
 	}
 	
@@ -154,9 +165,6 @@ public class ShowFrame extends JFrame {
 	{
 		return Long.parseLong(time.substring(0, 2)) * 60000 + Long.parseLong(time.substring(3, 5)) * 1000 + Long.parseLong(time.substring(6, 9));
 	}
-	
-	
-	
 	
 	private void initalize() {
 		this.setVisible(false);
