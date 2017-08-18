@@ -170,11 +170,6 @@ public class ControlFrame extends JFrame {
 			public void mouseReleased(MouseEvent e) {}
 			
 		});
-		
-		// this.setLayout(new BoxLayout(this.getContentPane(),
-		// BoxLayout.X_AXIS));
-		// mainPanel.setLayout(new BoxLayout(this.getContentPane(),
-		// BoxLayout.X_AXIS));
 
 		mainPanel.setVisible(true);
 		this.add(mainPanel);

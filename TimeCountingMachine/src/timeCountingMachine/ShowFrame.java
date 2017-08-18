@@ -1,6 +1,7 @@
 package timeCountingMachine;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -30,7 +31,6 @@ public class ShowFrame extends JFrame {
 	
 	private String currentUser = "";
 	private String[] rankColumnNames = {"Names", "Time"};
-	private String[][] rankData = new String[12][2];
 	
 	private Long record0 = (long) 300000;
 	private Long record1 = (long) 300000;
@@ -41,14 +41,8 @@ public class ShowFrame extends JFrame {
 	private JLabel totalDrivingTimerLabel = new JLabel("05:00:00");
 	private JLabel lapTimerLabel = new JLabel("00:00:00");
 	
-	private DefaultTableModel model = new DefaultTableModel(rankData, rankColumnNames)
-	{
-        public boolean isCellEditable(int row, int column)
-        {
-        	return false;
-        }
-	};
-	private JTable rankTable = new JTable(model);
+	private DefaultTableModel model;
+	private JTable rankTable;// = new JTable(model);
 	
 	// layout
 	GridBagLayout gbl = new GridBagLayout();
@@ -146,16 +140,25 @@ public class ShowFrame extends JFrame {
 	
 	public void setRankTable() {
 		System.out.println("rank");
-		rankData = FileManager.getRankDataAsStringArray();
 		int i = 0;
-		for (String[] strings : rankData)
+		String[][] stringArray = FileManager.getRankDataAsStringArray();
+		
+		model = new DefaultTableModel(stringArray, rankColumnNames)
+		{
+	        public boolean isCellEditable(int row, int column)
+	        {
+	        	return false;
+	        }
+		};
+		
+		for (String[] strings : stringArray)
 		{
 			model.setValueAt(strings[0], i, 0);
 			model.setValueAt(strings[1], i, 1);
 			i++;
 		}
 		model.fireTableDataChanged();
-		rankTable.updateUI();
+		if (rankTable != null) rankTable.updateUI();
 	}
 	
 	private void addGrid(GridBagLayout gbl, GridBagConstraints gbc, Component c, int gridx, int gridy, int gridwidth,
@@ -193,11 +196,17 @@ public class ShowFrame extends JFrame {
 	
 	private void initalize() {
 		this.setVisible(false);
+		
 		// layout
 		gbc.fill = GridBagConstraints.BOTH;
 		this.setLayout(gbl);
-
+		
+		// set rankTable
 		setRankTable();
+		rankTable = new JTable(model);
+		rankTable.setFont(new Font("Sans-serif", Font.BOLD, 32));
+		rankTable.setRowHeight(48);
+		
 		// gridboxlayout
 		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 3, 1);
 		addGrid(gbl, gbc, lapTimerPanel, 0, 1, 2, 1, 3, 1);
@@ -221,7 +230,6 @@ public class ShowFrame extends JFrame {
 		totalDrivingTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lapTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-		// this.add(mainPanel);
 		this.setVisible(true);
 	}
 }
