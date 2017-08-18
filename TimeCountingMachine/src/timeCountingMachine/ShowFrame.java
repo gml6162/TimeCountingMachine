@@ -13,14 +13,18 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 public class ShowFrame extends JFrame {
+	
+
+	
 	private JPanel totalDrivingTimerPanel = new JPanel(new GridLayout(1, 1));
 	private JPanel lapTimerPanel = new JPanel();
 	private JPanel personPanel = new JPanel();
 	private JPanel currentNamePanel = new JPanel(new GridLayout(4,1));
 	private JPanel recordPanel = new JPanel(new GridLayout(3,1));
-	private JTable rankTable = new JTable();
+
 
 	private JLabel nameLabel = new JLabel();
 	private JLabel robotNameLabel = new JLabel();
@@ -40,7 +44,9 @@ public class ShowFrame extends JFrame {
 	
 	private JLabel totalDrivingTimerLabel = new JLabel("05:00:00");
 	private JLabel lapTimerLabel = new JLabel("00:00:00");
-
+	
+	private DefaultTableModel model = new DefaultTableModel(rankData, rankColumnNames);
+	private JTable rankTable = new JTable(model);
 	// layout
 	GridBagLayout gbl = new GridBagLayout();
 	GridBagConstraints gbc = new GridBagConstraints();
@@ -96,28 +102,23 @@ public class ShowFrame extends JFrame {
 		setRecordLabel();
 	}
 	
-	public void setRankTable() {
+	/*public void setRankTable() {
 		int i = 0;
 		for(i = 0; i<12; i++) {
 			rankData[i][0] = "";
 			rankData[i][1] = "";
 			//rankData[i][1] = "";
-			
 		}
 		
-		
-		rankTable = new JTable(rankData, rankColumnNames);
-		
-	}
+		model = new DefaultTableModel(rankData, rankColumnNames);
+		rankTable = new JTable(model);
+	}*/
 	
-	public void setRankTable(long record) {
-		int i = 0;
-		System.out.println(record);
-		for(i=0; i<12; i++) {
-			
-		}
-		System.out.println("setRank");
-		rankTable = new JTable(rankData, rankColumnNames);
+	public void setRankTable() {
+		System.out.println("rank");
+		rankData = FileManager.getRankDataAsStringArray();
+		model.fireTableDataChanged();
+		model.insertRow(1, new String[][]{{"test"},{"success"}});
 		rankTable.updateUI();
 	}
 	

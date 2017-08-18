@@ -45,6 +45,7 @@ public class FileManager
 		for(Iterator<String> iterator = keys.iterator(); iterator.hasNext(); )
 		{
 			name = iterator.next();
+			//System.out.println(stringToLong(userRecordData.get(name)[3]));
 			time = stringToLong(userRecordData.get(name)[3]);
 			for (i = 0; i < rankData.size(); i++)
 			{
@@ -56,7 +57,6 @@ public class FileManager
 			}
 			if (i == rankData.size())
 			{
-				rankData.add(i, new String[] {name, userRecordData.get(name)[3]});
 			}
 		}
 	}
@@ -172,9 +172,16 @@ public class FileManager
 	}
 	
 	private static String longToString(long time)
-	{
-		return String.format("%02d분%02d초%03d", time % 1000, (time / 1000) % 60, (time / (1000 * 60)) % 60);
-	}
+	   {
+	      return String.format("%02d분%02d초%03d", time / 60000, (time / 1000) % 60, time % 1000);
+	   }
+	//private static String longToString(long time)
+	
+	/*{
+		
+		return String.format("%02d분%02d초%03d", (time / (1000 * 60)) % 60,  (time / 1000) % 60, time % 1000);
+		//return String.format("%02d분%02d초%03d", time % 1000, (time / 1000) % 60, (time / (1000 * 60)) % 60);
+	}*/
 	
 	private static long stringToLong(String time)
 	{
