@@ -126,10 +126,10 @@ public class ShowFrame extends JFrame {
 	
 	public void setcurrentNamePanel(String key){
 		currentUser = key;
-		nameLabel.setText("�̸� : "+key);
-		robotNameLabel.setText("�κ� �̸� : " + FileManager.userData.get(key)[0].toString());
-		schoolLabel.setText("�б� : " + FileManager.userData.get(key)[1].toString());
-		fieldLabel.setText("�о� : "+ FileManager.userData.get(key)[2].toString());
+		nameLabel.setText("ÀÌ¸§ : "+key);
+		robotNameLabel.setText("·Îº¿ ÀÌ¸§ : " + FileManager.userData.get(key)[0].toString());
+		schoolLabel.setText("ÇÐ±³ : " + FileManager.userData.get(key)[1].toString());
+		fieldLabel.setText("ºÐ¾ß : "+ FileManager.userData.get(key)[2].toString());
 	
 		record0 = (long) 300000;
 		record1 = (long) 300000;
@@ -159,12 +159,9 @@ public class ShowFrame extends JFrame {
 			i++;
 		}
 		model.fireTableDataChanged();
-		if (rankTable != null) 
-		{
-			rankTable.updateUI();
-			rankTable.repaint();
-		}
-	}
+		if (rankTable != null)
+      rankTable.setModel(model);
+  }
 	
 	private void addGrid(GridBagLayout gbl, GridBagConstraints gbc, Component c, int gridx, int gridy, int gridwidth,
 			int gridheight, int weightx, int weighty) {
