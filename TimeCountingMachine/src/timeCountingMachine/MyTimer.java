@@ -121,7 +121,7 @@ public class MyTimer {
 			if (b.getText().equals("START")) {
 				drivingEndTime = System.currentTimeMillis();
 				drivingTime = drivingEndTime - drivingStartTime;
-				if(drivingTime >= 240){}
+				if(drivingTime >= 240000){}
 				else {	
 					b.setText("STOP");
 					subTimeMinute = 00;

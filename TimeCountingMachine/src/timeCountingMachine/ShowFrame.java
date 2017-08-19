@@ -126,10 +126,10 @@ public class ShowFrame extends JFrame {
 	
 	public void setcurrentNamePanel(String key){
 		currentUser = key;
-		nameLabel.setText("ÀÌ¸§ : "+key);
-		robotNameLabel.setText("·Îº¿ ÀÌ¸§ : " + FileManager.userData.get(key)[0].toString());
-		schoolLabel.setText("ÇÐ±³ : " + FileManager.userData.get(key)[1].toString());
-		fieldLabel.setText("ºÐ¾ß : "+ FileManager.userData.get(key)[2].toString());
+		nameLabel.setText("Name : "+key);
+		robotNameLabel.setText("Robot Name : " + FileManager.userData.get(key)[0].toString());
+		schoolLabel.setText("School : " + FileManager.userData.get(key)[1].toString());
+		fieldLabel.setText("Field : "+ FileManager.userData.get(key)[2].toString());
 	
 		record0 = (long) 300000;
 		record1 = (long) 300000;
