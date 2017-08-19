@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
@@ -37,13 +38,13 @@ public class ShowFrame extends JFrame {
 	private Long record2 = (long) 300000;
 	private Long record3 = (long) 300000; // record4 is invisible
 	private int recentRecordNum = 0; // This is to delete and backup record
+	private int order;
 	
 	private JLabel totalDrivingTimerLabel = new JLabel("05:00:00");
 	private JLabel lapTimerLabel = new JLabel("00:00:00");
 	
 	private DefaultTableModel model;
 	private JTable rankTable;// = new JTable(model);
-	
 	// layout
 	GridBagLayout gbl = new GridBagLayout();
 	GridBagConstraints gbc = new GridBagConstraints();
@@ -158,7 +159,12 @@ public class ShowFrame extends JFrame {
 			i++;
 		}
 		model.fireTableDataChanged();
-		if (rankTable != null) rankTable.updateUI();
+		if (rankTable != null) 
+		{
+			rankTable.updateUI();
+			rankTable.repaint();
+			rankTable.getView
+		}
 	}
 	
 	private void addGrid(GridBagLayout gbl, GridBagConstraints gbc, Component c, int gridx, int gridy, int gridwidth,

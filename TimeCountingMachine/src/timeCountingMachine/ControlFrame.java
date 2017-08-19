@@ -29,14 +29,15 @@ import timeCountingMachine.MyTimer.reverseTimer;
 import timeCountingMachine.MyTimer.sequenceTimer;
 import timeCountingMachine.MyTimer.setBreakButton;
 import timeCountingMachine.MyTimer.setDelayButton;
+import timeCountingMachine.MyTimer.setDeleteButton;
 
 
 public class ControlFrame extends JFrame {
 	
 	public ShowFrame showFrame;
 
-	private JPanel mainButtonPanel = new JPanel(new GridLayout(3, 1, 0, 5));
-	private JPanel subButtonPanel = new JPanel(new GridLayout(3, 1, 0, 5));
+	private JPanel mainButtonPanel = new JPanel(new GridLayout(4, 1, 0, 5));
+	private JPanel subButtonPanel = new JPanel(new GridLayout(4, 1, 0, 5));
 	private JPanel switchPersonPanel = new JPanel(new GridLayout(2, 1, 0, 5));
 	private JPanel mainPanel = new JPanel(new GridLayout(1, 3, 5, 5));
 	private JPanel userDataPanel = new JPanel();
@@ -48,6 +49,7 @@ public class ControlFrame extends JFrame {
 	private JButton downButton = new JButton("down");
 	private JButton delayButton = new JButton("delay");
 	private JButton breakButton = new JButton("break");
+	private JButton deleteButton = new JButton("delete");
 	private JLabel mainButtonLabel = new JLabel("total driving time");
 	private JLabel subButtonLabel = new JLabel("lap time");
 
@@ -125,6 +127,7 @@ public class ControlFrame extends JFrame {
 		mainButtonPanel.add(delayButton);
 		subButtonPanel.add(breakButton);
 		userDataPanel.add(userDataTable);
+		subButtonPanel.add(deleteButton);
 		
 		switchPersonPanel.add(upButton);
 		switchPersonPanel.add(downButton);
@@ -138,6 +141,7 @@ public class ControlFrame extends JFrame {
 		// event
 		setBreakButton breakButtonListener = timer.new setBreakButton();
 		setDelayButton delayButtonListener = timer.new setDelayButton();
+		setDeleteButton deleteButtonListener = timer.new setDeleteButton();
 		reverseTimer mainActionListener = timer.new reverseTimer();
 		sequenceTimer subActionLisener = timer.new sequenceTimer();
 		
@@ -145,6 +149,9 @@ public class ControlFrame extends JFrame {
 		subStartStopButton.addActionListener(subActionLisener);
 		delayButton.addActionListener(delayButtonListener);
 		breakButton.addActionListener(breakButtonListener);
+		deleteButton.addActionListener(deleteButtonListener);
+		
+		
 		userDataTable.addMouseListener(new MouseListener(){
 
 			@Override
