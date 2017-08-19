@@ -40,7 +40,7 @@ public class MyTimer {
 	
 	//test
 	public ShowFrame showFrame;
-	public ControlFrame ctrlFrame;
+	public static ControlFrame ctrlFrame;
 
 	class MainTimerTask extends TimerTask {
 		@Override
@@ -121,8 +121,11 @@ public class MyTimer {
 			if (b.getText().equals("START")) {
 				drivingEndTime = System.currentTimeMillis();
 				drivingTime = drivingEndTime - drivingStartTime;
-				if(drivingTime >= 240000){}
-				else {	
+				System.out.println(drivingTime);
+				System.out.println(ctrlFrame.getmainButtonStatus());
+				if(drivingTime <= 240000 && ctrlFrame.getmainButtonStatus().equals("STOP"))
+				{
+					System.out.println("test");
 					b.setText("STOP");
 					subTimeMinute = 00;
 					subTimeSecond = 00;
@@ -130,6 +133,9 @@ public class MyTimer {
 					lapStartTime = (long) System.currentTimeMillis();
 					subTimer = new Timer();
 					subTimer.schedule(new subTimerTask(), 0, 50);
+				}
+				else {
+					b.setSelected(false);
 				}
 			} else {
 				b.setText("START");
@@ -184,5 +190,10 @@ public class MyTimer {
 
 	private void setLapTime(long lapTime) {
 		this.lapTime = lapTime;
+	}
+	
+	public static void setControlFrame(ControlFrame f)
+	{
+		ctrlFrame = f;
 	}
 }

@@ -14,5 +14,6 @@ public class Main {
 		ControlFrame ctrlFrame = new ControlFrame();
 		ctrlFrame.showFrame = showFrame;
 		ctrlFrame.link();
+		MyTimer.setControlFrame(ctrlFrame);
 	}
 }

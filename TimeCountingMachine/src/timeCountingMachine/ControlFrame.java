@@ -97,6 +97,10 @@ public class ControlFrame extends JFrame {
 		userDataTable = new JTable(model);
 	}
 	
+	public String getmainButtonStatus() {
+		return mainStartStopButton.getText();
+	}
+	
 	private void Signal(char sign) {
 		//start signal
 		if(sign == 's') {

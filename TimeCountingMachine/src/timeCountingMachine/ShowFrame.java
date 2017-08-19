@@ -174,6 +174,8 @@ public class ShowFrame extends JFrame {
 		gbl.setConstraints(c, gbc);
 		this.add(c);
 	}
+	
+	
 
 	public ShowFrame() {
 		super("Show");
