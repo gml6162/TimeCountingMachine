@@ -159,12 +159,8 @@ public class ShowFrame extends JFrame {
 			i++;
 		}
 		model.fireTableDataChanged();
-		if (rankTable != null) 
-		{
-			rankTable.updateUI();
-			rankTable.repaint();
-			rankTable.getView
-		}
+		if (rankTable != null)
+			rankTable.setModel(model);
 	}
 	
 	private void addGrid(GridBagLayout gbl, GridBagConstraints gbc, Component c, int gridx, int gridy, int gridwidth,
