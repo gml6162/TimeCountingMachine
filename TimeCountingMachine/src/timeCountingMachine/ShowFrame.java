@@ -163,7 +163,6 @@ public class ShowFrame extends JFrame {
 		{
 			rankTable.updateUI();
 			rankTable.repaint();
-			rankTable.getView
 		}
 	}
 	

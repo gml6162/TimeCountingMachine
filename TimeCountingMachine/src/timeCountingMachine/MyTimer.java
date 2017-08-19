@@ -119,13 +119,18 @@ public class MyTimer {
 			// TODO Auto-generated method stub
 			JToggleButton b = (JToggleButton) e.getSource();
 			if (b.getText().equals("START")) {
-				b.setText("STOP");
-				subTimeMinute = 00;
-				subTimeSecond = 00;
-				subTimeMillisec = 00;
-				lapStartTime = (long) System.currentTimeMillis();
-				subTimer = new Timer();
-				subTimer.schedule(new subTimerTask(), 0, 50);
+				drivingEndTime = System.currentTimeMillis();
+				drivingTime = drivingEndTime - drivingStartTime;
+				if(drivingTime >= 240){}
+				else {	
+					b.setText("STOP");
+					subTimeMinute = 00;
+					subTimeSecond = 00;
+					subTimeMillisec = 00;
+					lapStartTime = (long) System.currentTimeMillis();
+					subTimer = new Timer();
+					subTimer.schedule(new subTimerTask(), 0, 50);
+				}
 			} else {
 				b.setText("START");
 				lapEndTime = System.currentTimeMillis();
