@@ -37,28 +37,21 @@ public class MyTimer {
 	private long lapEndTime;
 	private long lapTime;
 	private static long totalTime = 300000;
-	
-	//test
-	public ShowFrame showFrame;
-	public static ControlFrame ctrlFrame;
 
 	class MainTimerTask extends TimerTask {
 		@Override
 		public void run() {
-			showFrame.setTotalDrivingTimerLabel(mainTime);
-
+			Main.showFrame.setTotalDrivingTimerLabel(mainTime);
 			drivingEndTime = (long) System.currentTimeMillis();
 			drivingTime = totalTime - (drivingEndTime - drivingStartTime);
-			//drivingTime = 300 - (drivingEndTime - drivingStartTime);
 			if (drivingTime < 0) {
 				ControlFrame.mainStartStopButton.doClick();
 				drivingTime = 0;
-				if(ControlFrame.subStartStopButton.getText().equals("STOP")){
+				if(ControlFrame.subStartStopButton.getText().equals("STOP")) {
 					ControlFrame.subStartStopButton.doClick();
 				}
-				showFrame.setTotalDrivingTimerLabel("00:00:00");
-				showFrame.setLapTimerLabel("00:00:00");
-
+				Main.showFrame.setTotalDrivingTimerLabel("00:00:00");
+				Main.showFrame.setLapTimerLabel("00:00:00");
 			} else {
 				mainTimeMinute = (int) (drivingTime / 60000);
 				mainTimeSecond = (int) ((drivingTime / 1000) % 60);
@@ -73,8 +66,7 @@ public class MyTimer {
 
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
-			showFrame.setLapTimerLabel(subTime);
+			Main.showFrame.setLapTimerLabel(subTime);
 
 			lapEndTime = (long) System.currentTimeMillis();
 			setLapTime(lapEndTime - lapStartTime);
@@ -89,7 +81,6 @@ public class MyTimer {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
 			JToggleButton b = (JToggleButton) e.getSource();
 			if (b.getText().equals("START")) {
 				b.setText("STOP");
@@ -122,8 +113,8 @@ public class MyTimer {
 				drivingEndTime = System.currentTimeMillis();
 				drivingTime = drivingEndTime - drivingStartTime;
 				System.out.println(drivingTime);
-				System.out.println(ctrlFrame.getmainButtonStatus());
-				if(drivingTime <= 240000 && ctrlFrame.getmainButtonStatus().equals("STOP"))
+				System.out.println(Main.controlFrame.getmainButtonStatus());
+				if(drivingTime <= 240000 && Main.controlFrame.getmainButtonStatus().equals("STOP"))
 				{
 					System.out.println("test");
 					b.setText("STOP");
@@ -145,8 +136,8 @@ public class MyTimer {
 				subTimer.cancel();
 				
 				//sign P//test
-				showFrame.setRecordLabel(lapTime);
-				showFrame.setRankTable();
+				Main.showFrame.setRecordLabel(lapTime);
+				Main.showFrame.setRankTable();
 			}
 		}
 	}
@@ -178,7 +169,7 @@ public class MyTimer {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			showFrame.deleteRecentRecord();
+			Main.showFrame.deleteRecentRecord();
 		}
 		
 	}
@@ -190,10 +181,5 @@ public class MyTimer {
 
 	private void setLapTime(long lapTime) {
 		this.lapTime = lapTime;
-	}
-	
-	public static void setControlFrame(ControlFrame f)
-	{
-		ctrlFrame = f;
 	}
 }

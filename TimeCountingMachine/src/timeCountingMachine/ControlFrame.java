@@ -34,7 +34,7 @@ import timeCountingMachine.MyTimer.setDeleteButton;
 
 public class ControlFrame extends JFrame {
 	
-	public ShowFrame showFrame;
+	//public ShowFrame Main.showFrame;
 
 	private JPanel mainButtonPanel = new JPanel(new GridLayout(4, 1, 0, 5));
 	private JPanel subButtonPanel = new JPanel(new GridLayout(4, 1, 0, 5));
@@ -58,17 +58,12 @@ public class ControlFrame extends JFrame {
 	private String currentName;
 	private int row;
 	
+	private MyTimer timer = new MyTimer();
+	
 	public int getRow() {
 		return row;
 	}
 
-	private MyTimer timer = new MyTimer();
-	
-	//test
-	void link() {
-		timer.showFrame = showFrame;
-	}
-	
 	public ControlFrame() {
 		super("Control");
 		this.setDefaultCloseOperation(ControlFrame.EXIT_ON_CLOSE);
@@ -109,11 +104,10 @@ public class ControlFrame extends JFrame {
 		//stop signal
 		if(sign == 'p') {
 			subStartStopButton.doClick();
-			showFrame.setRecordLabel(timer.getLapTime());
+			Main.showFrame.setRecordLabel(timer.getLapTime());
 			System.out.println(timer.getLapTime());
 		}
 	}
-	
 	
 	private void initialize() {
 
@@ -164,7 +158,7 @@ public class ControlFrame extends JFrame {
 				JTable jt = (JTable) e.getSource();
 				row = jt.getSelectedRow();
 				currentName = (String)userDataTable.getValueAt(row, 0);
-				showFrame.setcurrentNamePanel(currentName);
+				Main.showFrame.setcurrentNamePanel(currentName);
 				System.out.println(currentName);
 			}
 

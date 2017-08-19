@@ -39,7 +39,6 @@ public class ShowFrame extends JFrame {
 	private Long record3 = (long) 300000; // record4 is invisible
 	private int recentRecordNum = 0; // This is to delete and backup record
 
-	
 	private JLabel totalDrivingTimerLabel = new JLabel("05:00:00");
 	private JLabel lapTimerLabel = new JLabel("00:00:00");
 	
