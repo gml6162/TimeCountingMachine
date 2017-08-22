@@ -183,4 +183,8 @@ public class MyTimer {
 	private void setLapTime(long lapTime) {
 		this.lapTime = lapTime;
 	}
+	
+	public void resetTotalTime(){
+		totalTime = 3000000;
+	}
 }

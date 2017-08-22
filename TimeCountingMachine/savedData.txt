@@ -6,7 +6,7 @@ abc/하늘보리/서울시립대/Junior/05분00초000
 이희진/배고파/고등어대/Junior/05분00초000
 K/A/고등어대/Junior/05분00초000
 Flash/Risk/고등어대/Junior/05분00초000
-마티어스/에레브/고등어대/Junior/05분00초000
+마티어스/에레브/고등어대/Junior/00분01초518
 Jack/Chicken/서울시립대/Junior/05분00초000
 Code/Haskel/서울시립대/Junior/05분00초000
 Univ/Seoul/고등어대/Junior/05분00초000

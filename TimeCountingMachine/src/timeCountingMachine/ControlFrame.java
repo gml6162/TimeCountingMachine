@@ -183,6 +183,7 @@ public class ControlFrame extends JFrame {
 				JTable jt = (JTable) e.getSource();
 				row = jt.getSelectedRow();
 				currentName = (String) userDataTable.getValueAt(row, 0);
+				timer.resetTotalTime();
 				Main.showFrame.setcurrentNamePanel(currentName);
 				System.out.println(currentName);
 			}
