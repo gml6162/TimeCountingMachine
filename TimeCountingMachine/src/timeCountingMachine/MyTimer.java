@@ -170,6 +170,7 @@ public class MyTimer {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			Main.showFrame.deleteRecentRecord();
+			Main.showFrame.setRankTable();
 		}
 		
 	}
