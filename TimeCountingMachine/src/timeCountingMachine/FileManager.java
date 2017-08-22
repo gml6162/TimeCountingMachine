@@ -27,15 +27,20 @@ public class FileManager
 	private static HashMap<String, String[]> userRecordData = new HashMap<String, String[]>();
 	private static ArrayList<String[]> rankData = new ArrayList<>();
 
+	public static void newUserRecord(String user, long record)
+	{
+		if (record < stringToLong(userRecordData.get(user)[3]))
+		{
+			setUserRecord(user, record);
+		}
+	}
+	
 	public static void setUserRecord(String user, long record)
 	{
 		String[] temp = userRecordData.get(user);
-		if (record < stringToLong(userRecordData.get(user)[3]))
-		{
-			userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], longToString(record)});
-			saveData();
-			setRankData();
-		}
+		userRecordData.replace(user, new String[]{temp[0], temp[1], temp[2], longToString(record)});
+		saveData();
+		setRankData();
 	}
 	
 	public static void setRankData()

@@ -87,7 +87,7 @@ public class ShowFrame extends JFrame {
 		record1Label.setText(longToString(record1));
 		record2Label.setText(longToString(record2));
 		
-		FileManager.setUserRecord(currentUser, record);
+		FileManager.newUserRecord(currentUser, record);
 	}
 	
 	public void deleteRecentRecord() {
@@ -159,8 +159,8 @@ public class ShowFrame extends JFrame {
 		}
 		model.fireTableDataChanged();
 		if (rankTable != null)
-      rankTable.setModel(model);
-  }
+			rankTable.setModel(model);
+	}
 	
 	private void addGrid(GridBagLayout gbl, GridBagConstraints gbc, Component c, int gridx, int gridy, int gridwidth,
 			int gridheight, int weightx, int weighty) {
