@@ -100,12 +100,14 @@ public class ControlFrame extends JFrame {
 		// start signal
 		if (sign == 's') {
 			subStartStopButton.doClick();
+			timer.setBreakable(true);
 		}
 		// stop signal
 		if (sign == 'p') {
 			subStartStopButton.doClick();
 			Main.showFrame.setRecordLabel(timer.getLapTime());
 			System.out.println(timer.getLapTime());
+			timer.setBreakable(false);
 		}
 	}
 

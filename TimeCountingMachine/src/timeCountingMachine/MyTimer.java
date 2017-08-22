@@ -37,6 +37,7 @@ public class MyTimer {
 	private long lapEndTime;
 	private long lapTime;
 	private static long totalTime = 300000;
+	private static boolean breakable = false;
 
 	class MainTimerTask extends TimerTask {
 		@Override
@@ -157,10 +158,12 @@ public class MyTimer {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			totalTime -= 5000;//5 second	5*1000
+			if(breakable){
+				totalTime -= 5000;//5 second	5*1000
+				System.out.println("break");
+			}
+
 			ControlFrame.subStartStopButton.doClick();
-			System.out.println("break");
-			
 		}
 	}
 	
@@ -187,4 +190,9 @@ public class MyTimer {
 	public void resetTotalTime(){
 		totalTime = 3000000;
 	}
+	
+	public void setBreakable(boolean b){
+		breakable =b;
+	}
+	
 }
