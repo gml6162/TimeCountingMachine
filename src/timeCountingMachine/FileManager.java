@@ -131,8 +131,8 @@ public class FileManager
 			while ((read = reader.read()) != -1)
 			{
 				buffer.append((char) read);
-				System.out.print((char) read);
-				System.out.print(read);
+				//System.out.print((char) read);
+				//System.out.print(read);
 			}
 			reader.close();
 			
@@ -157,7 +157,7 @@ public class FileManager
 				while ((read = reader.read()) != -1)
 				{
 					buffer.append((char) read);
-					System.out.print((char) read);
+					//System.out.print((char) read);
 				}
 				reader.close();
 				

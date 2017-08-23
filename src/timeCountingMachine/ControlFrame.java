@@ -113,34 +113,10 @@ public class ControlFrame extends JFrame {
 		}
 	}
 
-	public void test() {
-		Enumeration ports = CommPortIdentifier.getPortIdentifiers();
-		try {
-			while (ports.hasMoreElements()) {
-				CommPortIdentifier port = (CommPortIdentifier) ports.nextElement();
-				String type;
-				switch (port.getPortType()) {
-				case CommPortIdentifier.PORT_PARALLEL:
-					type = "Parallel";
-					break;
-				case CommPortIdentifier.PORT_SERIAL:
-					type = "Serial";
-					break;
-				default: /// Shouldn't happen
-					type = "Unknown";
-					break;
-				}
-				System.out.println(port.getName() + ": " + type);
-			}
-		} catch (Exception NoSuchPortException) {
-			System.out.println("NO");
-		}
-		System.out.println("end");
-	}
+	
 
 	private void initialize() {
 
-		test();
 		this.setVisible(false);
 		this.setUserDataPanel();
 
