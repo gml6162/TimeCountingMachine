@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
@@ -36,22 +37,22 @@ public class MyTimer {
 	private long lapStartTime;
 	private long lapEndTime;
 	private long lapTime;
-	private static long totalTime = 300000;
-	private static boolean breakable = false;
+	private static long totalTime = 240000;
+	public static boolean breakable = false;
 
 	class MainTimerTask extends TimerTask {
 		@Override
 		public void run() {
 			Main.showFrame.setTotalDrivingTimerLabel(mainTime);
 			drivingEndTime = (long) System.currentTimeMillis();
-			drivingTime = totalTime - (drivingEndTime - drivingStartTime);
+			drivingTime = totalTime - (drivingEndTime - getDrivingStartTime());
 			if (drivingTime < 0) {
 				ControlFrame.mainStartStopButton.doClick();
 				drivingTime = 0;
 				if(ControlFrame.subStartStopButton.getText().equals("STOP")) {
 					ControlFrame.subStartStopButton.doClick();
 				}
-				Main.showFrame.setTotalDrivingTimerLabel("00:00:00");
+				Main.showFrame.setTotalDrivingTimerLabel("Time Out");
 				Main.showFrame.setLapTimerLabel("00:00:00");
 			} else {
 				mainTimeMinute = (int) (drivingTime / 60000);
@@ -85,10 +86,10 @@ public class MyTimer {
 			JToggleButton b = (JToggleButton) e.getSource();
 			if (b.getText().equals("START")) {
 				b.setText("STOP");
-				mainTimeMinute = 05;
+				mainTimeMinute = 04;
 				mainTimeSecond = 00;
 				mainTimeMillisec = 00;
-				drivingStartTime = (long) System.currentTimeMillis();
+				setDrivingStartTime((long) System.currentTimeMillis());
 				mainTimer = new Timer();
 				mainTimer.schedule(new MainTimerTask(), 0, 50);
 
@@ -98,7 +99,7 @@ public class MyTimer {
 				b.setText("START");
 				mainTimer.cancel();
 				drivingEndTime = System.currentTimeMillis();
-				drivingTime = drivingEndTime - drivingStartTime;
+				drivingTime = drivingEndTime - getDrivingStartTime();
 				System.out.println(String.valueOf(drivingTime));
 			}
 		}
@@ -112,9 +113,9 @@ public class MyTimer {
 			JToggleButton b = (JToggleButton) e.getSource();
 			if (b.getText().equals("START")) {
 				drivingEndTime = System.currentTimeMillis();
-				drivingTime = drivingEndTime - drivingStartTime;
-				System.out.println(drivingTime);
-				System.out.println(Main.controlFrame.getmainButtonStatus());
+				drivingTime = drivingEndTime - getDrivingStartTime();
+				//System.out.println(drivingTime);
+				//System.out.println(Main.controlFrame.getmainButtonStatus());
 				if(drivingTime <= 240000 && Main.controlFrame.getmainButtonStatus().equals("STOP"))
 				{
 					System.out.println("test");
@@ -133,24 +134,72 @@ public class MyTimer {
 				b.setText("START");
 				lapEndTime = System.currentTimeMillis();
 				lapTime = lapEndTime - lapStartTime;
-				setLapTime(lapTime);
+				//setLapTime(lapTime);
 				subTimer.cancel();
 				
 				//sign P//test
-				Main.showFrame.setRecordLabel(lapTime);
-				Main.showFrame.setRankTable();
+				/*Main.showFrame.setRecordLabel(lapTime);
+				Main.showFrame.setRankTable();*/
 			}
 		}
+	}
+	
+	class setChangeButton implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			totalTime = Main.controlFrame.getTimeField();
+		}
+		
+	}
+	
+	class setDCButton implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Main.controlFrame.setDCpenalty();
+		}
+		
 	}
 	
 	class setDelayButton implements ActionListener {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			totalTime = 295000;
-			System.out.println(totalTime);
+			//delayFrame a = new delayFrame();
+			totalTime -= 30000;
+			//System.out.println(totalTime);
+			
 		}
+	}
+	
+	class delayFrame extends JFrame {
+		
+		JTextField time = new JTextField();
+		JButton chkButton = new JButton();
+		private void initalize() {
+			this.setVisible(false);
+			this.add(time);
+			this.add(chkButton);
+			
+			chkButton.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					totalTime = Long.parseLong(time.getText());
+					
+				}
+			});
+			this.setVisible(true);
+		}
+		
+		public delayFrame() {
+			super("Control");
+			this.dispose();
+			this.setBounds(400, 200, 300, 300);
+			this.initalize();
+		}
+		
 	}
 	
 	class setBreakButton implements ActionListener {
@@ -161,6 +210,7 @@ public class MyTimer {
 			if(breakable){
 				totalTime -= 5000;//5 second	5*1000
 				System.out.println("break");
+				Main.controlFrame.startCheck = false;
 			}
 
 			ControlFrame.subStartStopButton.doClick();
@@ -184,7 +234,7 @@ public class MyTimer {
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
 			if(!breakable) {
-				totalTime += 5000;
+				totalTime += 30000;
 				setBreakable(true);
 			}
 		}
@@ -200,11 +250,22 @@ public class MyTimer {
 	}
 	
 	public void resetTotalTime(){
-		totalTime = 3000000;
+		totalTime = 240000;
 	}
 	
 	public void setBreakable(boolean b){
 		breakable =b;
 	}
-	
+
+	private long getDrivingStartTime() {
+		return drivingStartTime;
+	}
+
+	private void setDrivingStartTime(long drivingStartTime) {
+		this.drivingStartTime = drivingStartTime;
+	}
+
+	public void resetLapStartTime() {
+		this.lapStartTime = (long)System.currentTimeMillis();
+	}
 }

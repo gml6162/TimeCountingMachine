@@ -15,12 +15,12 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 public class ShowFrame extends JFrame {
-	
+
 	private JPanel totalDrivingTimerPanel = new JPanel(new GridLayout(1, 1));
 	private JPanel lapTimerPanel = new JPanel();
 	private JPanel personPanel = new JPanel();
-	private JPanel currentNamePanel = new JPanel(new GridLayout(4,1));
-	private JPanel recordPanel = new JPanel(new GridLayout(3,1));
+	private JPanel currentNamePanel = new JPanel(new GridLayout(4, 1));
+	private JPanel recordPanel = new JPanel(new GridLayout(3, 1));
 
 	private JLabel nameLabel = new JLabel();
 	private JLabel robotNameLabel = new JLabel();
@@ -29,19 +29,19 @@ public class ShowFrame extends JFrame {
 	private JLabel record0Label = new JLabel();
 	private JLabel record1Label = new JLabel();
 	private JLabel record2Label = new JLabel();
-	
+
 	private String currentUser = "";
-	private String[] rankColumnNames = {"Names", "Time"};
-	
+	private String[] rankColumnNames = { "Names", "Time" };
+
 	private Long record0 = (long) 300000;
 	private Long record1 = (long) 300000;
 	private Long record2 = (long) 300000;
 	private Long record3 = (long) 300000; // record4 is invisible
 	private int recentRecordNum = 0; // This is to delete and backup record
 
-	private JLabel totalDrivingTimerLabel = new JLabel("05:00:00");
+	private JLabel totalDrivingTimerLabel = new JLabel("04:00:00");
 	private JLabel lapTimerLabel = new JLabel("00:00:00");
-	
+
 	private DefaultTableModel model;
 	private JTable rankTable;// = new JTable(model);
 	// layout
@@ -52,44 +52,48 @@ public class ShowFrame extends JFrame {
 		totalDrivingTimerLabel.setText(str);
 	}
 
+	public String getTotalDrivingTimerLabel() {
+		return totalDrivingTimerLabel.toString();
+	}
+
 	public void setLapTimerLabel(String str) {
 		lapTimerLabel.setText(str);
 	}
-	
+
+	public void setLapTimerLabel(Long time) {
+		lapTimerLabel.setText(longToString(time));
+	}
+
 	public void setRecordLabel(long record) {
 		if (record < record0) {
 			record3 = record2;
 			record2 = record1;
-			record1 = record0;			
+			record1 = record0;
 			record0 = record;
 			recentRecordNum = 0;
-		}
-		else if (record < record1) {
+		} else if (record < record1) {
 			record3 = record2;
 			record2 = record1;
 			record1 = record;
 			recentRecordNum = 1;
-		} 
-		else if (record < record2) {
+		} else if (record < record2) {
 			record3 = record2;
 			record2 = record;
 			recentRecordNum = 2;
-		}
-		else if (record < record3) {
+		} else if (record < record3) {
 			record3 = record;
 			recentRecordNum = 3;
-		}
-		else {
+		} else {
 			recentRecordNum = 4;
 		}
-		
+
 		record0Label.setText(longToString(record0));
 		record1Label.setText(longToString(record1));
 		record2Label.setText(longToString(record2));
-		
+
 		FileManager.newUserRecord(currentUser, record);
 	}
-	
+
 	public void deleteRecentRecord() {
 		if (recentRecordNum == 0) {
 			record0 = record1;
@@ -97,71 +101,72 @@ public class ShowFrame extends JFrame {
 			record2 = record3;
 			record3 = (long) 300000;
 			FileManager.setUserRecord(currentUser, record0);
-		}
-		else if (recentRecordNum == 1) {
+		} else if (recentRecordNum == 1) {
 			record1 = record2;
 			record2 = record3;
 			record3 = (long) 300000;
-		}
-		else if (recentRecordNum == 2) {
+		} else if (recentRecordNum == 2) {
 			record2 = record3;
 			record3 = (long) 300000;
-		}
-		else if (recentRecordNum == 3) {
+		} else if (recentRecordNum == 3) {
 			record3 = (long) 300000;
 		}
 		recentRecordNum = 4;
-		
+
 		record0Label.setText(longToString(record0));
 		record1Label.setText(longToString(record1));
 		record2Label.setText(longToString(record2));
 	}
-	
+
 	public void setRecordLabel() {
-		record0Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
-		record1Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
-		record2Label.setText(String.format("%02d:%02d:%02d", 5, 0, 0));
+		record0Label.setText(String.format("%02d:%02d:%02d", 4, 0, 0));
+		record1Label.setText(String.format("%02d:%02d:%02d", 4, 0, 0));
+		record2Label.setText(String.format("%02d:%02d:%02d", 4, 0, 0));
 	}
-	
-	public void setcurrentNamePanel(String key){
+
+	public void setcurrentNamePanel(String key) {
 		currentUser = key;
-		nameLabel.setText("Name : "+key);
+		nameLabel.setText("Name : " + key);
 		robotNameLabel.setText("Robot Name : " + FileManager.userData.get(key)[0].toString());
 		schoolLabel.setText("School : " + FileManager.userData.get(key)[1].toString());
-		fieldLabel.setText("Field : "+ FileManager.userData.get(key)[2].toString());
-	
+		fieldLabel.setText("Field : " + FileManager.userData.get(key)[2].toString());
+
 		record0 = (long) 300000;
 		record1 = (long) 300000;
 		record2 = (long) 300000;
 		record3 = (long) 300000;
-		
+
 		setRecordLabel();
 	}
-	
+
 	public void setRankTable() {
-		System.out.println("rank");
+		// System.out.println("rank");
 		int i = 0;
 		String[][] stringArray = FileManager.getRankDataAsStringArray();
-		
-		model = new DefaultTableModel(stringArray, rankColumnNames)
-		{
-	        public boolean isCellEditable(int row, int column)
-	        {
-	        	return false;
-	        }
+
+		model = new DefaultTableModel(stringArray, rankColumnNames) {
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
 		};
-		
-		for (String[] strings : stringArray)
-		{
-			model.setValueAt(strings[0], i, 0);
-			model.setValueAt(strings[1], i, 1);
+
+		for (String[] strings : stringArray) {
+			if (stringToLong(stringArray[i][1]) == 300000) {
+				System.out.println("a");
+				model.setValueAt("", i, 0);
+				model.setValueAt("", i, 1);
+			}
+			else {
+				model.setValueAt(strings[0], i, 0);
+				model.setValueAt(strings[1], i, 1);
+			}
 			i++;
 		}
 		model.fireTableDataChanged();
 		if (rankTable != null)
 			rankTable.setModel(model);
 	}
-	
+
 	private void addGrid(GridBagLayout gbl, GridBagConstraints gbc, Component c, int gridx, int gridy, int gridwidth,
 			int gridheight, int weightx, int weighty) {
 		gbc.gridx = gridx;
@@ -173,8 +178,6 @@ public class ShowFrame extends JFrame {
 		gbl.setConstraints(c, gbc);
 		this.add(c);
 	}
-	
-	
 
 	public ShowFrame() {
 		super("Show");
@@ -183,32 +186,41 @@ public class ShowFrame extends JFrame {
 		this.initalize();
 	}
 
-	private static String longToString(long time)
-	{
-		long ms = time % 1000;
-		long se = (time / 1000) % 60;
-		long mi = (time / (1000 * 60)) % 60;
+	private static String longToString(long time) {
+		return String.format("%02d:%02d:%02d", time / 60000, (time / 1000) % 60, time % 1000);
+	}
 
-		return String.format("%02d:%02d:%02d", mi, se, ms);
+	private long stringToLong(String time) {
+		return Long.parseLong(time.substring(0, 2)) * 60000 + Long.parseLong(time.substring(3, 5)) * 1000
+				+ Long.parseLong(time.substring(6, 9));
 	}
-	
-	private long stringToLong(String time)
-	{
-		return Long.parseLong(time.substring(0, 2)) * 60000 + Long.parseLong(time.substring(3, 5)) * 1000 + Long.parseLong(time.substring(6, 9));
-	}
-	
+
 	private void initalize() {
 		this.setVisible(false);
-		
+
 		// layout
 		gbc.fill = GridBagConstraints.BOTH;
 		this.setLayout(gbl);
-		
+
 		// set rankTable
 		setRankTable();
 		rankTable = new JTable(model);
 		rankTable.setFont(new Font("Sans-serif", Font.BOLD, 32));
 		rankTable.setRowHeight(48);
+
+		//setFont
+		totalDrivingTimerLabel.setFont(new Font("Sans-serif", Font.BOLD, 128));
+		lapTimerLabel.setFont(new Font("Sans-serif", Font.BOLD, 128));
+		nameLabel.setFont(new Font("Sans-serif", Font.PLAIN, 32));
+		robotNameLabel.setFont(new Font("Sans-serif", Font.PLAIN, 32));
+		schoolLabel.setFont(new Font("Sans-serif", Font.PLAIN, 32));
+		fieldLabel.setFont(new Font("Sans-serif", Font.PLAIN, 32));
+		record0Label.setFont(new Font("Sans-serif", Font.BOLD, 64));
+		record1Label.setFont(new Font("Sans-serif", Font.BOLD, 64));
+		record2Label.setFont(new Font("Sans-serif", Font.BOLD, 64));
+		
+		
+		
 		
 		// gridboxlayout
 		addGrid(gbl, gbc, totalDrivingTimerPanel, 0, 0, 2, 1, 3, 1);
@@ -219,16 +231,16 @@ public class ShowFrame extends JFrame {
 
 		totalDrivingTimerPanel.add(totalDrivingTimerLabel);
 		lapTimerPanel.add(lapTimerLabel);
-		
+
 		currentNamePanel.add(nameLabel);
 		currentNamePanel.add(robotNameLabel);
 		currentNamePanel.add(schoolLabel);
 		currentNamePanel.add(fieldLabel);
-		
+
 		recordPanel.add(record0Label);
 		recordPanel.add(record1Label);
 		recordPanel.add(record2Label);
-		
+
 		// Property
 		totalDrivingTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lapTimerLabel.setHorizontalAlignment(SwingConstants.CENTER);
